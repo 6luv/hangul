@@ -43,7 +43,7 @@ const QuizCard: FC<QuizCardProps> = ({
             p={10}
             rounded="2xl"
             bgColor="blue.100"
-            _hover={{ bgColor: "blue.300", textColor: "white" }}
+            _hover={{ bgColor: "blue.300" }}
             onClick={() => onClickChoice(v)}
           >
             {v}

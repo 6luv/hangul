@@ -47,6 +47,48 @@ const Quiz: FC = () => {
                 <Text fontSize={40} fontWeight="bold">
                   문제를 모두 풀었습니다!
                 </Text>
+                <Flex
+                  flexDir="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  border="2px"
+                  borderColor="gray.200"
+                  boxShadow="md"
+                  rounded="lg"
+                  w="33%"
+                  h={400}
+                  my={4}
+                >
+                  <Flex flexDir="column" alignItems="start">
+                    {quizData.map((v, i) => {
+                      return v.correctAnswer === choices[i] ? (
+                        <Text key={i} fontSize={40} fontWeight="bold">
+                          {choices[i]}
+                        </Text>
+                      ) : (
+                        <Flex>
+                          <Text
+                            key={i}
+                            fontSize={40}
+                            fontWeight="bold"
+                            textDecor="line-through"
+                          >
+                            {choices[i]}
+                          </Text>
+                          <Text
+                            key={i}
+                            fontSize={40}
+                            fontWeight="bold"
+                            textColor="red"
+                            ml={4}
+                          >
+                            {v.correctAnswer}
+                          </Text>
+                        </Flex>
+                      );
+                    })}
+                  </Flex>
+                </Flex>
                 <Button
                   mt={8}
                   h={12}
