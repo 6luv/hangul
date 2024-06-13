@@ -1,5 +1,5 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import QuizCard from "../components/QuizCard";
 import quizData from "../data/quizData.json";
 import { useOutletContext } from "react-router-dom";
@@ -9,20 +9,34 @@ const Quiz: FC = () => {
   const [start, setStart] = useState<boolean>(false);
   const [currentQuizIndex, setCurrentQuizIndex] = useState<number>(0);
   const [choices, setChoices] = useState<string[]>([]);
-  const { signer } = useOutletContext<OutletContext>();
+  const [correctCount, setCorrectCount] = useState<number>(0);
+  const { signer, setIsPassed } = useOutletContext<OutletContext>();
 
   const onClickReplay = () => {
     setStart(false);
     setCurrentQuizIndex(0);
     setChoices([]);
+    setCorrectCount(0);
   };
 
   const onClickChoice = (v: string) => {
+    if (v === quizData[currentQuizIndex].correctAnswer) {
+      setCorrectCount(correctCount + 1);
+    }
+
     setChoices([...choices, v]);
     setCurrentQuizIndex(currentQuizIndex + 1);
   };
 
   const currentQuiz = quizData[currentQuizIndex];
+
+  useEffect(() => console.log(correctCount), [correctCount]);
+
+  useEffect(() => {
+    if (correctCount >= 3) {
+      setIsPassed(true);
+    }
+  }, [correctCount]);
 
   return (
     <Flex flexDir="column" w="100%">
@@ -39,7 +53,7 @@ const Quiz: FC = () => {
       >
         {start ? (
           <>
-            {currentQuizIndex != 2 ? (
+            {currentQuizIndex != 3 ? (
               <QuizCard
                 quiz={currentQuiz}
                 currentQuizIndex={currentQuizIndex}
@@ -65,7 +79,12 @@ const Quiz: FC = () => {
                   <Flex flexDir="column" alignItems="start">
                     {quizData.map((v, i) => {
                       return v.correctAnswer === choices[i] ? (
-                        <Text key={i} fontSize={40} fontWeight="bold">
+                        <Text
+                          key={i}
+                          fontSize={40}
+                          fontWeight="bold"
+                          textColor="blue.500"
+                        >
                           {choices[i]}
                         </Text>
                       ) : (

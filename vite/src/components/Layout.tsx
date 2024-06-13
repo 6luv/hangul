@@ -7,10 +7,13 @@ import { JsonRpcSigner } from "ethers";
 export interface OutletContext {
   signer: JsonRpcSigner | null;
   setSigner: Dispatch<SetStateAction<JsonRpcSigner | null>>;
+  isPassed: boolean;
+  setIsPassed: Dispatch<SetStateAction<boolean>>;
 }
 
 const Layout: FC = () => {
   const [signer, setSigner] = useState<JsonRpcSigner | null>(null);
+  const [isPassed, setIsPassed] = useState<boolean>(false);
 
   return (
     <Flex
@@ -26,7 +29,7 @@ const Layout: FC = () => {
     >
       <Header signer={signer} setSigner={setSigner} />
       <Flex flexGrow={1} bgColor="blue.100" roundedBottom="lg">
-        <Outlet context={{ signer }} />
+        <Outlet context={{ signer, isPassed, setIsPassed }} />
       </Flex>
     </Flex>
   );
