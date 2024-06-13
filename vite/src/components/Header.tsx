@@ -1,6 +1,13 @@
 import { Button, Flex } from "@chakra-ui/react";
-import { FC } from "react";
+import { JsonRpcSigner } from "ethers";
+import { Dispatch, FC, SetStateAction } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useMetamaskLogin } from "../lib";
+
+interface HeaderProps {
+  signer: JsonRpcSigner | null;
+  setSigner: Dispatch<SetStateAction<JsonRpcSigner | null>>;
+}
 
 const headerNavLinks = [
   {
@@ -21,8 +28,12 @@ const headerNavLinks = [
   },
 ];
 
-const Header: FC = () => {
+const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
   const navigate = useNavigate();
+
+  const onClickmetamaskLogout = () => {
+    setSigner(null);
+  };
 
   return (
     <Flex
@@ -38,7 +49,7 @@ const Header: FC = () => {
           훈민정음
         </Flex>
       </Link>
-      <Flex justifyContent="space-between" w="30%">
+      <Flex w="30%" display={["none", "none", "flex"]} gap={20}>
         {headerNavLinks.map((v, i) => (
           <Button
             key={i}
@@ -51,10 +62,32 @@ const Header: FC = () => {
           </Button>
         ))}
       </Flex>
-      <Flex>
-        <Button variant="link" textColor="black" fontSize={20}>
-          로그인
-        </Button>
+      <Flex
+        display={["none", "none", "flex"]}
+        alignItems="center"
+        w={40}
+        justifyContent="end"
+      >
+        {signer ? (
+          <Button
+            bgColor="white"
+            textColor="blue.500"
+            fontSize={20}
+            onClick={onClickmetamaskLogout}
+          >
+            {signer.address.substring(0, 5)}...
+            {signer.address.substring(signer.address.length - 4)}
+          </Button>
+        ) : (
+          <Button
+            variant="link"
+            textColor="black"
+            fontSize={20}
+            onClick={() => useMetamaskLogin(setSigner)}
+          >
+            로그인
+          </Button>
+        )}
       </Flex>
     </Flex>
   );

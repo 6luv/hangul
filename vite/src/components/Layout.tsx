@@ -1,9 +1,17 @@
 import { Flex } from "@chakra-ui/react";
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
+import { JsonRpcSigner } from "ethers";
+
+export interface OutletContext {
+  signer: JsonRpcSigner | null;
+  setSigner: Dispatch<SetStateAction<JsonRpcSigner | null>>;
+}
 
 const Layout: FC = () => {
+  const [signer, setSigner] = useState<JsonRpcSigner | null>(null);
+
   return (
     <Flex
       maxW={1280}
@@ -16,7 +24,7 @@ const Layout: FC = () => {
       borderColor="teal.800"
       boxShadow="2xl"
     >
-      <Header />
+      <Header signer={signer} setSigner={setSigner} />
       <Flex flexGrow={1} bgColor="blue.100" roundedBottom="lg">
         <Outlet />
       </Flex>
