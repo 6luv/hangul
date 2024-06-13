@@ -6,11 +6,10 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Text,
 } from "@chakra-ui/react";
 import { JsonRpcSigner } from "ethers";
 import { Dispatch, FC, SetStateAction } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMetamaskLogin } from "../lib";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
@@ -20,6 +19,10 @@ interface HeaderProps {
 }
 
 const headerNavLinks = [
+  {
+    name: "홈",
+    path: "/",
+  },
   {
     name: "문제",
     path: "/quiz",
@@ -54,17 +57,12 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
       borderColor="teal.800"
       borderBottom="2px"
     >
-      <Flex alignItems="center">
+      <Flex alignItems="center" w="fit-content">
         <Box mr={2} bgColor="red" p="6px" rounded="full" />
         <Box mr={2} bgColor="orange" p="6px" rounded="full" />
-        <Box mr={4} bgColor="green" p="6px" rounded="full" />
-        <Link to="/">
-          <Flex fontSize={28} fontWeight="bold">
-            훈민정음
-          </Flex>
-        </Link>
+        <Box bgColor="green" p="6px" rounded="full" />
       </Flex>
-      <Flex w="30%" display={["none", "none", "flex"]} gap={20}>
+      <Flex w="35%" display={["none", "none", "flex"]} gap={20}>
         {headerNavLinks.map((v, i) => (
           <Button
             key={i}
