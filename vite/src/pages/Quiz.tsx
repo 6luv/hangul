@@ -1,7 +1,26 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { FC, useState } from "react";
+import QuizCard from "../components/QuizCard";
+import quizData from "../data/quizData.json";
 
 const Quiz: FC = () => {
+  const [start, setStart] = useState<boolean>(false);
+  const [currentQuizIndex, setCurrentQuizIndex] = useState<number>(0);
+  const [choices, setChoices] = useState<string[]>([]);
+
+  const onClickReplay = () => {
+    setStart(false);
+    setCurrentQuizIndex(0);
+    setChoices([]);
+  };
+
+  const onClickChoice = (v: string) => {
+    setChoices([...choices, v]);
+    setCurrentQuizIndex(currentQuizIndex + 1);
+  };
+
+  const currentQuiz = quizData[currentQuizIndex];
+
   return (
     <Flex flexDir="column" w="100%">
       <Flex
@@ -15,32 +34,57 @@ const Quiz: FC = () => {
         alignItems="center"
         flexDir="column"
       >
-        <Text fontSize={48} fontWeight="bold" pos="relative" mb="40px">
-          다음 중 <Text as="span">맞는 것</Text>
-          <Box
-            bgColor="blue.300"
-            pos="absolute"
-            rounded="lg"
-            w={36}
-            top={12}
-            left={145}
-            p={2}
-            zIndex={1}
-            opacity={0.4}
-          />
-          을 고르세요.
-        </Text>
-        <Text fontSize={32} mb="40px">
-          그는 ________가 납작하다.
-        </Text>
-        <Flex flexDir="column" gap={4} w={500}>
-          <Button fontSize={36} p={10} rounded="2xl">
-            뒤통수
-          </Button>
-          <Button fontSize={36} p={10} rounded="2xl">
-            뒷통수
-          </Button>
-        </Flex>
+        {start ? (
+          <>
+            {currentQuizIndex != 2 ? (
+              <QuizCard
+                quiz={currentQuiz}
+                currentQuizIndex={currentQuizIndex}
+                onClickChoice={onClickChoice}
+              />
+            ) : (
+              <>
+                <Text fontSize={40} fontWeight="bold">
+                  문제를 모두 풀었습니다!
+                </Text>
+                <Button
+                  mt={8}
+                  h={12}
+                  w="25%"
+                  bgColor="blue.300"
+                  _hover={{ bgColor: "blue.500" }}
+                  onClick={onClickReplay}
+                >
+                  <Text fontSize={20} textColor="white" fontWeight="bold">
+                    다시 풀어보기
+                  </Text>
+                </Button>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <Image src="/images/quiz-image.png" alt="한글" w={300} mb={16} />
+            <Text fontSize={32} fontWeight="semibold">
+              나의 한글 맞춤법 실력은?
+            </Text>
+            <Text fontSize={32} fontWeight="semibold">
+              문제 풀고 NFT 받아가세요!
+            </Text>
+            <Button
+              mt={8}
+              h={12}
+              w="25%"
+              onClick={() => setStart(true)}
+              bgColor="blue.300"
+              _hover={{ bgColor: "blue.500" }}
+            >
+              <Text fontSize={20} textColor="white" fontWeight="bold">
+                시작
+              </Text>
+            </Button>
+          </>
+        )}
       </Flex>
     </Flex>
   );
