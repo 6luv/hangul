@@ -1,5 +1,6 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { FC } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const headerNavLinks = [
   {
@@ -21,6 +22,8 @@ const headerNavLinks = [
 ];
 
 const Header: FC = () => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       h={20}
@@ -30,12 +33,20 @@ const Header: FC = () => {
       borderColor="teal.800"
       borderBottom="2px"
     >
-      <Flex fontSize={28} fontWeight="bold">
-        훈민정음
-      </Flex>
+      <Link to="/">
+        <Flex fontSize={28} fontWeight="bold">
+          훈민정음
+        </Flex>
+      </Link>
       <Flex justifyContent="space-between" w="30%">
         {headerNavLinks.map((v, i) => (
-          <Button key={i} variant="link" textColor="black" fontSize={20}>
+          <Button
+            key={i}
+            variant="link"
+            textColor="black"
+            fontSize={20}
+            onClick={() => navigate(v.path)}
+          >
             {v.name}
           </Button>
         ))}
