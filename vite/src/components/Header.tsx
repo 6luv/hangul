@@ -1,10 +1,12 @@
 import {
+  Box,
   Button,
   Flex,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
 } from "@chakra-ui/react";
 import { JsonRpcSigner } from "ethers";
 import { Dispatch, FC, SetStateAction } from "react";
@@ -52,11 +54,16 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
       borderColor="teal.800"
       borderBottom="2px"
     >
-      <Link to="/">
-        <Flex fontSize={28} fontWeight="bold">
-          훈민정음
-        </Flex>
-      </Link>
+      <Flex alignItems="center">
+        <Box mr={2} bgColor="red" p="6px" rounded="full" />
+        <Box mr={2} bgColor="orange" p="6px" rounded="full" />
+        <Box mr={4} bgColor="green" p="6px" rounded="full" />
+        <Link to="/">
+          <Flex fontSize={28} fontWeight="bold">
+            훈민정음
+          </Flex>
+        </Link>
+      </Flex>
       <Flex w="30%" display={["none", "none", "flex"]} gap={20}>
         {headerNavLinks.map((v, i) => (
           <Button
