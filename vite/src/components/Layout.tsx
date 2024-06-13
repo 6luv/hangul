@@ -26,7 +26,7 @@ const Layout: FC = () => {
     >
       <Header signer={signer} setSigner={setSigner} />
       <Flex flexGrow={1} bgColor="blue.100" roundedBottom="lg">
-        <Outlet />
+        <Outlet context={{ signer }} />
       </Flex>
     </Flex>
   );
