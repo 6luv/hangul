@@ -1,6 +1,6 @@
 import {
   Button,
-  //   Image,
+  Image,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -8,16 +8,21 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
 } from "@chakra-ui/react";
 import { FC } from "react";
 
 interface MintModalProps {
   isOpen: boolean;
   onClose: () => void;
-  //   nftMetadata: INftMetadata | undefined;
+  hangulNftMetadata: IHangulNftMetadata | undefined;
 }
 
-const MintModal: FC<MintModalProps> = ({ isOpen, onClose }) => {
+const MintModal: FC<MintModalProps> = ({
+  isOpen,
+  onClose,
+  hangulNftMetadata,
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -25,11 +30,11 @@ const MintModal: FC<MintModalProps> = ({ isOpen, onClose }) => {
         <ModalHeader>축하합니다!</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {/* <Image
-            src={`/images/nfts/${nftMetadata?.tokenId}.png`}
-            alt={nftMetadata?.name}
+          <Image
+            src={`/images/nfts/${hangulNftMetadata?.tokenId}.png`}
+            alt={hangulNftMetadata?.name}
           />
-          <Text>{nftMetadata?.name}</Text> */}
+          <Text>{hangulNftMetadata?.name}</Text>
         </ModalBody>
 
         <ModalFooter>

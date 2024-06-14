@@ -7,10 +7,10 @@ import axios from "axios";
 
 const nftMin: number = 1;
 const nftMax: number = 38;
-const nftAmount: number = 1;
 
 const Mint: FC = () => {
   const [tokenId, setTokenId] = useState<number>();
+  const [amount, setAmount] = useState<number>(0);
   const [hangulNftMetadata, setHangulNftMetadata] =
     useState<IHangulNftMetadata>();
   const [randomValue, setRandomValue] = useState<number>();
@@ -22,18 +22,14 @@ const Mint: FC = () => {
       getRandomValue();
       if (!mintContract || !tokenId) return;
 
-      console.log("tokenid : ", tokenId);
-      const response = await mintContract?.mintNft(tokenId, nftAmount);
+      const response = await mintContract?.mintNft(tokenId, amount);
       await response.wait();
-      console.log("response : ", response);
 
       const axiosResponse = await axios.get<INftMetadata>(
         `${import.meta.env.VITE_METADATA_URI}/${tokenId}.json`
       );
 
-      console.log(axiosResponse);
-      setHangulNftMetadata({ ...axiosResponse.data, tokenId, nftAmount });
-
+      setHangulNftMetadata({ ...axiosResponse.data, tokenId, amount });
       onOpen();
     } catch (error) {
       console.error(error);
@@ -46,6 +42,7 @@ const Mint: FC = () => {
 
   const getRandomTokenId = () => {
     setTokenId(Math.floor(Math.random() * (nftMax - nftMin + 1)) + nftMin);
+    setAmount(1);
   };
 
   useEffect(() => getRandomTokenId(), [randomValue]);
@@ -84,7 +81,11 @@ const Mint: FC = () => {
           </Text>
         </Button>
       </Flex>
-      <MintModal isOpen={isOpen} onClose={onClose} />
+      <MintModal
+        isOpen={isOpen}
+        onClose={onClose}
+        hangulNftMetadata={hangulNftMetadata}
+      />
     </Flex>
   );
 };
