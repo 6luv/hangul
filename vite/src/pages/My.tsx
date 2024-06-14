@@ -1,12 +1,33 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { Button, Flex, Grid, Text } from "@chakra-ui/react";
+import { FC, useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { OutletContext } from "../components/Layout";
+import NftCard from "../components/NftCard";
 
 const My: FC = () => {
   const [isApprovedForAll, setIsApprovedForAll] = useState<boolean>(false);
+  const [mintedList, setMintedList] = useState<number[]>();
+  const { signer, mintContract } = useOutletContext<OutletContext>();
 
   const onClickApprove = () => {
     setIsApprovedForAll(!isApprovedForAll);
   };
+
+  const getBalanceOfNfts = async () => {
+    try {
+      const response = await mintContract?.balanceOfNfts(signer?.address);
+      const temp = response.map((v: bigint) => Number(v));
+      setMintedList(temp);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getBalanceOfNfts();
+  }, [signer, mintContract]);
+
+  useEffect(() => console.log(mintedList), [mintedList]);
 
   return (
     <Flex flexDir="column" w="100%">
@@ -38,7 +59,25 @@ const My: FC = () => {
             {isApprovedForAll ? "거부" : "승인"}
           </Button>
         </Flex>
-        <Flex>내 NFT</Flex>
+        <Flex
+          w="100%"
+          h="100%"
+          flexDir="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Grid
+            templateColumns="repeat(4, 1fr)"
+            justifyContent="center"
+            gap={16}
+          >
+            {mintedList?.map((v, i) => {
+              if (v > 0) {
+                return <NftCard key={i} tokenId={i + 1} amount={v} />;
+              }
+            })}
+          </Grid>
+        </Flex>
       </Flex>
     </Flex>
   );
