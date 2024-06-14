@@ -1,4 +1,4 @@
-import { GridItem, Image, Text } from "@chakra-ui/react";
+import { Box, GridItem, Image, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
@@ -32,19 +32,32 @@ const NftCard: FC<NftCardProps> = ({ tokenId, amount }) => {
   }, []);
 
   return (
-    <GridItem display="flex" flexDir="column" w={48} alignItems="center">
-      <Image
-        src={hangulNftMetadata?.image}
-        alt={hangulNftMetadata?.name}
-        bgColor="white"
-        rounded="lg"
-        border="1px"
-        boxShadow="xl"
-        p={4}
-      />
-      <Text mt={4} fontSize={20} fontWeight="bold">
-        #{hangulNftMetadata?.tokenId} {hangulNftMetadata?.name}
-      </Text>
+    <GridItem display="flex" flexDir="column" w={48}>
+      <Box pos="relative">
+        <Text
+          pos="absolute"
+          top={2}
+          right={2}
+          fontSize={20}
+          fontWeight="semibold"
+          rounded="lg"
+          px={1}
+        >
+          x{amount}
+        </Text>
+        <Image
+          src={hangulNftMetadata?.image}
+          alt={hangulNftMetadata?.name}
+          bgColor="white"
+          rounded="lg"
+          border="1px"
+          boxShadow="xl"
+          p={4}
+        />
+        <Text mt={4} fontSize={20} fontWeight="bold" textAlign="center">
+          #{hangulNftMetadata?.tokenId} {hangulNftMetadata?.name}
+        </Text>
+      </Box>
     </GridItem>
   );
 };
