@@ -7,3 +7,13 @@ interface IQuizData {
   choices: string[];
   correctAnswer: string;
 }
+
+interface INftMetadata {
+  name: string;
+  image: string;
+}
+
+interface IHangulNftMetadata extends INftMetadata {
+  tokenId: number;
+  amount: number;
+}
