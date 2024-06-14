@@ -1,8 +1,8 @@
 import { Button, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { OutletContext } from "./Layout";
-import MintModal from "./MintModal";
+import { OutletContext } from "../components/Layout";
+import MintModal from "../components/MintModal";
 import axios from "axios";
 
 const nftMin: number = 1;
@@ -14,11 +14,13 @@ const Mint: FC = () => {
   const [hangulNftMetadata, setHangulNftMetadata] =
     useState<IHangulNftMetadata>();
   const [randomValue, setRandomValue] = useState<number>();
+  const [isLoading, setIsLoading] = useState<boolean>();
   const { isPassed, mintContract } = useOutletContext<OutletContext>();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onClickMint = async () => {
     try {
+      setIsLoading(true);
       getRandomValue();
       if (!mintContract || !tokenId) return;
 
@@ -31,8 +33,10 @@ const Mint: FC = () => {
 
       setHangulNftMetadata({ ...axiosResponse.data, tokenId, amount });
       onOpen();
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -75,6 +79,9 @@ const Mint: FC = () => {
           bgColor="blue.300"
           _hover={{ bgColor: "blue.500" }}
           onClick={onClickMint}
+          isLoading={isLoading}
+          textColor="white"
+          loadingText="발행중"
         >
           <Text fontSize={20} textColor="white" fontWeight="bold">
             발행하기

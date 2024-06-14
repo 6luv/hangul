@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Quiz from "./pages/Quiz";
-import Mint from "./components/Mint";
+import Mint from "./pages/Mint";
 
 const App: FC = () => {
   return (
