@@ -1,4 +1,4 @@
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import QuizCard from "../components/QuizCard";
 import quizData from "../data/quizData.json";
@@ -8,19 +8,32 @@ import { OutletContext } from "../components/Layout";
 const Quiz: FC = () => {
   const [start, setStart] = useState<boolean>(false);
   const [currentQuizIndex, setCurrentQuizIndex] = useState<number>(0);
+  const [quizList, setQuizList] = useState<IQuizData[]>([]);
+  const [quizIndexList, setQuizIndexList] = useState<number[]>([]);
   const [choices, setChoices] = useState<string[]>([]);
   const [correctCount, setCorrectCount] = useState<number>(0);
   const { signer, setIsPassed } = useOutletContext<OutletContext>();
 
-  const onClickReplay = () => {
-    setStart(false);
-    setCurrentQuizIndex(0);
-    setChoices([]);
-    setCorrectCount(0);
+  const onClickStart = () => {
+    setStart(true);
+    getCurrentQuizList();
+  };
+
+  const getCurrentQuizList = () => {
+    const tempQuiz = [];
+    const tempQuizIndex = [];
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * (22 - 0 + 1)) + 0;
+      tempQuiz.push(quizData[randomIndex]);
+      tempQuizIndex.push(randomIndex);
+    }
+
+    setQuizList(tempQuiz);
+    setQuizIndexList(tempQuizIndex);
   };
 
   const onClickChoice = (v: string) => {
-    if (v === quizData[currentQuizIndex].correctAnswer) {
+    if (v === quizData[quizIndexList[currentQuizIndex]].correctAnswer) {
       setCorrectCount(correctCount + 1);
     }
 
@@ -28,12 +41,16 @@ const Quiz: FC = () => {
     setCurrentQuizIndex(currentQuizIndex + 1);
   };
 
-  const currentQuiz = quizData[currentQuizIndex];
-
-  useEffect(() => console.log(correctCount), [correctCount]);
+  const onClickReplay = () => {
+    setStart(false);
+    setCurrentQuizIndex(0);
+    setChoices([]);
+    setCorrectCount(0);
+    setQuizList([]);
+  };
 
   useEffect(() => {
-    if (correctCount >= 3) {
+    if (correctCount >= 4) {
       setIsPassed(true);
     }
   }, [correctCount]);
@@ -53,9 +70,9 @@ const Quiz: FC = () => {
       >
         {start ? (
           <>
-            {currentQuizIndex != 3 ? (
+            {currentQuizIndex < 5 ? (
               <QuizCard
-                quiz={currentQuiz}
+                quiz={quizList[currentQuizIndex]}
                 currentQuizIndex={currentQuizIndex}
                 onClickChoice={onClickChoice}
               />
@@ -77,7 +94,7 @@ const Quiz: FC = () => {
                   my={4}
                 >
                   <Flex flexDir="column" alignItems="start">
-                    {quizData.map((v, i) => {
+                    {quizList.map((v, i) => {
                       return v.correctAnswer === choices[i] ? (
                         <Text
                           key={i}
@@ -88,24 +105,11 @@ const Quiz: FC = () => {
                           {choices[i]}
                         </Text>
                       ) : (
-                        <Flex>
-                          <Text
-                            key={i}
-                            fontSize={40}
-                            fontWeight="bold"
-                            textDecor="line-through"
-                          >
-                            {choices[i]}
-                          </Text>
-                          <Text
-                            key={i}
-                            fontSize={40}
-                            fontWeight="bold"
-                            textColor="red"
-                            ml={4}
-                          >
-                            {v.correctAnswer}
-                          </Text>
+                        <Flex flexDir="column">
+                          <Box key={i} fontSize={40} fontWeight="bold">
+                            <Text textDecor="line-through">{choices[i]}</Text>
+                            <Text textColor="red"> {v.correctAnswer}</Text>
+                          </Box>
                         </Flex>
                       );
                     })}
@@ -140,7 +144,7 @@ const Quiz: FC = () => {
                 mt={8}
                 h={12}
                 w="25%"
-                onClick={() => setStart(true)}
+                onClick={onClickStart}
                 bgColor="blue.300"
                 _hover={{ bgColor: "blue.500" }}
               >
