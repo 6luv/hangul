@@ -1,0 +1,117 @@
+[
+  {
+    "quiz": "그는 ________가 납작하다.",
+    "choices": ["뒤통수", "뒷통수"],
+    "correctAnswer": "뒤통수"
+  },
+  {
+    "quiz": "그는 ________처럼 일어났다.",
+    "choices": ["오뚜기", "오뚝이"],
+    "correctAnswer": "오뚝이"
+  },
+  {
+    "quiz": "마당에서 잔치를 ________.",
+    "choices": ["벌렸다", "벌였다"],
+    "correctAnswer": "벌였다"
+  },
+  {
+    "quiz": "죄 없는 사람을 범인으로 ______.",
+    "choices": ["몰아붙이다", "몰아부치다"],
+    "correctAnswer": "몰아붙이다"
+  },
+  {
+    "quiz": "극에 _____ 감정.",
+    "choices": ["치달은", "치닫은"],
+    "correctAnswer": "치달은"
+  },
+  {
+    "quiz": "아파트 잔금을 마저 _____ .",
+    "choices": ["치렀다", "치뤘다"],
+    "correctAnswer": "치렀다"
+  },
+  {
+    "quiz": "그 농부가 밭을 _____ 있었다.",
+    "choices": ["매고", "메고"],
+    "correctAnswer": "매고"
+  },
+  {
+    "quiz": "_____은 오른쪽에서 왼쪽으로 돈다.",
+    "choices": ["시계바늘", "시곗바늘"],
+    "correctAnswer": "시곗바늘"
+  },
+  {
+    "quiz": "_____도 안 보이네.",
+    "choices": ["콧배기", "코빼기"],
+    "correctAnswer": "코빼기"
+  },
+  {
+    "quiz": "운전 _____ 전화 못 받았어.",
+    "choices": ["하느냐고", "하느라고"],
+    "correctAnswer": "하느라고"
+  },
+  {
+    "quiz": "이 시험은 _____이 매우 높다.",
+    "choices": ["합격율", "합격률"],
+    "correctAnswer": "합격률"
+  },
+  {
+    "quiz": "손이 너무 _____ 주머니에 넣었다.",
+    "choices": ["시려", "시려워"],
+    "correctAnswer": "시려"
+  },
+  {
+    "quiz": "그 사람의 집은 살림이 _____ 않다.",
+    "choices": ["넉넉지", "넉넉치"],
+    "correctAnswer": "넉넉지"
+  },
+  {
+    "quiz": "그녀는 얼굴에 미소를 _____ 있다.",
+    "choices": ["띠고", "띄고"],
+    "correctAnswer": "띠고"
+  },
+  {
+    "quiz": "내가 _____ 알려줘야 하는 거야?",
+    "choices": ["일일이", "일일히"],
+    "correctAnswer": "일일이"
+  },
+  {
+    "quiz": "얼른 눈이 오면 _____.",
+    "choices": ["좋을텐데", "좋을 텐데"],
+    "correctAnswer": "좋을 텐데"
+  },
+  {
+    "quiz": "이 물건은 _____야 .",
+    "choices": ["내 거", "내 꺼"],
+    "correctAnswer": "내 거"
+  },
+  {
+    "quiz": "너의 _____ 꿈을 펼치길 바라.",
+    "choices": ["못다 이룬", "못 다 이룬"],
+    "correctAnswer": "못다 이룬"
+  },
+  {
+    "quiz": "_____ 내가 좋아하는 것은 도넛이다.",
+    "choices": ["그 중", "그중"],
+    "correctAnswer": "그중"
+  },
+  {
+    "quiz": "짐이 많아서 가방에 _____.",
+    "choices": ["욱여넣었어", "우겨넣었어"],
+    "correctAnswer": "욱여넣었어"
+  },
+  {
+    "quiz": "불이 _____ 수없이 번졌다.",
+    "choices": ["겉잡을", "걷잡을"],
+    "correctAnswer": "걷잡을"
+  },
+  {
+    "quiz": "_____ 여름이 가고 가을이 왔다.",
+    "choices": ["어느 덧", "어느덧"],
+    "correctAnswer": "어느덧"
+  },
+  {
+    "quiz": "태극기를 _____.",
+    "choices": ["계양하다", "게양하다"],
+    "correctAnswer": "게양하다"
+  }
+]

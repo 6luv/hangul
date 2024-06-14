@@ -9,6 +9,8 @@ contract MintNft is ERC1155 {
     string public symbol;
     string metadataUri;
 
+    mapping(uint => address) private _owners;
+
     constructor (string memory _name, string memory _symbol, string memory _metadataUri) ERC1155("") {
         name = _name;
         symbol = _symbol;
@@ -18,6 +20,7 @@ contract MintNft is ERC1155 {
     function mintNft(uint _tokenId, uint _amount) public {
         require(_tokenId > 0 && _tokenId <= 38, "No exist token.");
         _mint(msg.sender, _tokenId, _amount, "");
+        _owners[_tokenId] = msg.sender;
     }
 
     function uri(uint _tokenId) public view override returns (string memory) {
@@ -32,5 +35,10 @@ contract MintNft is ERC1155 {
         }
 
         return result;
+    }
+
+    function ownerOf(uint _tokenId) public view returns(address) {
+        require(_tokenId > 0 && _tokenId <= 38, "Invalid tokenId");
+        return _owners[_tokenId];
     }
 }
