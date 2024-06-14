@@ -5,12 +5,12 @@ import { OutletContext } from "./Layout";
 import axios from "axios";
 import MyNftModal from "./SaleModal";
 
-interface NftCardProps {
+interface MyNftCardProps {
   tokenId: number;
   amount: number;
 }
 
-const NftCard: FC<NftCardProps> = ({ tokenId, amount }) => {
+const MyNftCard: FC<MyNftCardProps> = ({ tokenId, amount }) => {
   const [hangulNftMetadata, setHangulNftMetadata] =
     useState<IHangulNftMetadata | null>(null);
   const { mintContract } = useOutletContext<OutletContext>();
@@ -74,4 +74,4 @@ const NftCard: FC<NftCardProps> = ({ tokenId, amount }) => {
   );
 };
 
-export default NftCard;
+export default MyNftCard;

@@ -2,8 +2,8 @@ import { Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
-import NftCard from "../components/MyNftCard";
 import { FiXCircle } from "react-icons/fi";
+import MyNftCard from "../components/MyNftCard";
 
 const My: FC = () => {
   const [isApprovedForAll, setIsApprovedForAll] = useState<boolean>(false);
@@ -86,7 +86,7 @@ const My: FC = () => {
               >
                 {mintedList?.map((v, i) => {
                   if (v > 0) {
-                    return <NftCard key={i} tokenId={i + 1} amount={v} />;
+                    return <MyNftCard key={i} tokenId={i + 1} amount={v} />;
                   }
                 })}
               </Grid>
