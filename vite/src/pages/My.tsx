@@ -65,11 +65,14 @@ const My: FC = () => {
           flexDir="column"
           alignItems="center"
           justifyContent="center"
+          overflowY="auto"
         >
           <Grid
             templateColumns="repeat(4, 1fr)"
             justifyContent="center"
             gap={16}
+            maxH={520}
+            overflowY="auto"
           >
             {mintedList?.map((v, i) => {
               if (v > 0) {
