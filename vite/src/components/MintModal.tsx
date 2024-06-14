@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Flex,
   Image,
@@ -35,8 +36,14 @@ const MintModal: FC<MintModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader></ModalHeader>
+      <ModalContent border="3px solid black">
+        <ModalHeader>
+          <Flex alignItems="center" w="fit-content">
+            <Box mr={2} bgColor="red" p="6px" rounded="full" />
+            <Box mr={2} bgColor="orange" p="6px" rounded="full" />
+            <Box bgColor="green" p="6px" rounded="full" />
+          </Flex>
+        </ModalHeader>
         <ModalBody>
           <Flex flexDir="column" justifyContent="center" alignItems="center">
             <Image
@@ -53,7 +60,7 @@ const MintModal: FC<MintModalProps> = ({
         <ModalFooter>
           <Button
             onClick={onClickClose}
-            textColor="blue.500"
+            textColor="black"
             fontSize={20}
             h={12}
             w={20}
