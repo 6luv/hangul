@@ -3,7 +3,7 @@ res
 .states
 artifacts
 .env
-/data/
+data
 
 # Logs
 logs
