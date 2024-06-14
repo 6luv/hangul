@@ -35,7 +35,7 @@ const NftCard: FC<NftCardProps> = ({ tokenId, amount }) => {
 
   return (
     <>
-      <GridItem display="flex" flexDir="column" w={48}>
+      <GridItem display="flex" flexDir="column" w={[40, 48, 48, 48]}>
         <Box pos="relative">
           <Text
             pos="absolute"

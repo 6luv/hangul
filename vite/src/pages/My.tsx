@@ -52,7 +52,7 @@ const My: FC = () => {
               justifyContent="center"
               gap={4}
             >
-              <Text fontSize="32" fontWeight="bold">
+              <Text fontSize={["20", "32", "32"]} fontWeight="bold">
                 판매 등록 권한
               </Text>
               <Button
@@ -71,11 +71,18 @@ const My: FC = () => {
               overflowY="auto"
             >
               <Grid
-                templateColumns="repeat(4, 1fr)"
+                templateColumns={[
+                  "repeat(1, 1fr)",
+                  "repeat(2, 1fr)",
+                  "repeat(2, 1fr)",
+                  "repeat(3, 1fr)",
+                  "repeat(4, 1fr)",
+                ]}
                 justifyContent="center"
                 gap={16}
-                maxH={520}
+                maxH={[375, 420, 520]}
                 overflowY="auto"
+                mt={[2, 2, 0, 0]}
               >
                 {mintedList?.map((v, i) => {
                   if (v > 0) {

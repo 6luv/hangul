@@ -135,18 +135,23 @@ const Quiz: FC = () => {
           </>
         ) : (
           <>
-            <Image src="/images/quiz-image.png" alt="한글" w={300} mb={16} />
-            <Text fontSize={32} fontWeight="semibold">
+            <Image
+              src="/images/quiz-image.png"
+              alt="한글"
+              w={[200, 300, 300]}
+              mb={[8, 16, 16]}
+            />
+            <Text fontSize={[20, 32, 32]} fontWeight="semibold">
               나의 한글 맞춤법 실력은?
             </Text>
-            <Text fontSize={32} fontWeight="semibold">
+            <Text fontSize={[20, 32, 32]} fontWeight="semibold">
               문제 풀고 NFT 받아가세요!
             </Text>
             {signer ? (
               <Button
                 mt={8}
                 h={12}
-                w="25%"
+                w={["60%", "60%", "25%"]}
                 onClick={onClickStart}
                 bgColor="blue.300"
                 _hover={{ bgColor: "blue.500" }}

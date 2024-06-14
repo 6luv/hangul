@@ -65,7 +65,7 @@ const Mint: FC = () => {
         flexDir="column"
       >
         <Image
-          w={80}
+          w={[40, 60, 80]}
           opacity="0.7"
           rounded="2xl"
           src="/images/random.png"
@@ -74,7 +74,7 @@ const Mint: FC = () => {
         <Button
           mt={8}
           h={12}
-          w="28%"
+          w={["60%", "40%", "28%"]}
           isDisabled={!isPassed}
           bgColor="blue.300"
           _hover={{ bgColor: "blue.500" }}
