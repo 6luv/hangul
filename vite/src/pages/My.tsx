@@ -2,7 +2,7 @@ import { Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
-import NftCard from "../components/NftCard";
+import NftCard from "../components/MyNftCard";
 import { FiXCircle } from "react-icons/fi";
 
 const My: FC = () => {
