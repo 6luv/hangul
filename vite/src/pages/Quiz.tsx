@@ -78,8 +78,13 @@ const Quiz: FC = () => {
               />
             ) : (
               <>
+                <Text fontSize={32} textColor="blue.500" fontWeight="bold">
+                  {correctCount} / 5
+                </Text>
                 <Text fontSize={40} fontWeight="bold">
-                  문제를 모두 풀었습니다!
+                  {correctCount >= 4
+                    ? "한글 NFT를 발행해 보세요!"
+                    : "다시 도전해보세요!"}
                 </Text>
                 <Flex
                   flexDir="column"
@@ -105,11 +110,9 @@ const Quiz: FC = () => {
                           {choices[i]}
                         </Text>
                       ) : (
-                        <Flex flexDir="column">
-                          <Box key={i} fontSize={40} fontWeight="bold">
-                            <Text textDecor="line-through">{choices[i]}</Text>
-                            <Text textColor="red"> {v.correctAnswer}</Text>
-                          </Box>
+                        <Flex key={i} fontSize={40} fontWeight="bold" gap={4}>
+                          <Text textDecor="line-through">{choices[i]}</Text>
+                          <Text textColor="red"> {v.correctAnswer}</Text>
                         </Flex>
                       );
                     })}

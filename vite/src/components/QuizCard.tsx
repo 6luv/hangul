@@ -33,10 +33,10 @@ const QuizCard: FC<QuizCardProps> = ({
         을 고르세요.
       </Text>
       <Text fontSize={32} mb="60px">
-        {quiz.quiz}
+        {quiz?.quiz}
       </Text>
       <Flex flexDir="column" gap={4} w={500}>
-        {quiz.choices.map((v, i) => (
+        {quiz?.choices.map((v, i) => (
           <Button
             key={i}
             fontSize={36}
