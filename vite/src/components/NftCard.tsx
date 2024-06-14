@@ -1,4 +1,4 @@
-import { Flex, GridItem, Image, Text } from "@chakra-ui/react";
+import { GridItem, Image, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
