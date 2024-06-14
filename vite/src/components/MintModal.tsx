@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   Image,
   Modal,
   ModalBody,
@@ -27,18 +28,29 @@ const MintModal: FC<MintModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>축하합니다!</ModalHeader>
-        <ModalCloseButton />
+        <ModalHeader></ModalHeader>
         <ModalBody>
-          <Image
-            src={`/images/nfts/${hangulNftMetadata?.tokenId}.png`}
-            alt={hangulNftMetadata?.name}
-          />
-          <Text>{hangulNftMetadata?.name}</Text>
+          <Flex flexDir="column" justifyContent="center" alignItems="center">
+            <Image
+              w={96}
+              src={`/images/nfts/${hangulNftMetadata?.tokenId}.png`}
+              alt={hangulNftMetadata?.name}
+            />
+            <Text fontSize={24} fontWeight="bold" textAlign="center" w="80%">
+              한글 NFT #{hangulNftMetadata?.tokenId} [{hangulNftMetadata?.name}]
+            </Text>
+          </Flex>
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button
+            onClick={onClose}
+            textColor="blue.500"
+            fontSize={20}
+            h={12}
+            w={20}
+            bgColor="white"
+          >
             확인
           </Button>
         </ModalFooter>
