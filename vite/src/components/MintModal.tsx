@@ -4,7 +4,6 @@ import {
   Image,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -12,6 +11,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FC } from "react";
+import { useOutletContext } from "react-router-dom";
+import { OutletContext } from "./Layout";
 
 interface MintModalProps {
   isOpen: boolean;
@@ -24,6 +25,13 @@ const MintModal: FC<MintModalProps> = ({
   onClose,
   hangulNftMetadata,
 }) => {
+  const { setIsPassed } = useOutletContext<OutletContext>();
+
+  const onClickClose = () => {
+    onClose();
+    setIsPassed(false);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -44,7 +52,7 @@ const MintModal: FC<MintModalProps> = ({
 
         <ModalFooter>
           <Button
-            onClick={onClose}
+            onClick={onClickClose}
             textColor="blue.500"
             fontSize={20}
             h={12}
