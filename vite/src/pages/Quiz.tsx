@@ -78,10 +78,14 @@ const Quiz: FC = () => {
               />
             ) : (
               <>
-                <Text fontSize={32} textColor="blue.500" fontWeight="bold">
+                <Text
+                  fontSize={[20, 24, 32]}
+                  textColor="blue.500"
+                  fontWeight="bold"
+                >
                   {correctCount} / 5
                 </Text>
-                <Text fontSize={40} fontWeight="bold">
+                <Text fontSize={[20, 32, 40]} fontWeight="bold">
                   {correctCount >= 4
                     ? "한글 NFT를 발행해 보세요!"
                     : "다시 도전해보세요!"}
@@ -94,8 +98,8 @@ const Quiz: FC = () => {
                   borderColor="gray.200"
                   boxShadow="md"
                   rounded="lg"
-                  w="33%"
-                  h={400}
+                  w={["90%", "70%", "40%"]}
+                  h={[200, 300, 400]}
                   my={4}
                 >
                   <Flex flexDir="column" alignItems="start">
@@ -103,16 +107,28 @@ const Quiz: FC = () => {
                       return v.correctAnswer === choices[i] ? (
                         <Text
                           key={i}
-                          fontSize={40}
+                          fontSize={[24, 32, 40]}
                           fontWeight="bold"
                           textColor="blue.500"
+                          w="100%"
                         >
-                          {choices[i]}
+                          {choices[i]}{" "}
                         </Text>
                       ) : (
-                        <Flex key={i} fontSize={40} fontWeight="bold" gap={4}>
-                          <Text textDecor="line-through">{choices[i]}</Text>
-                          <Text textColor="red"> {v.correctAnswer}</Text>
+                        <Flex
+                          key={i}
+                          fontSize={[24, 32, 40]}
+                          fontWeight="bold"
+                          gap={4}
+                          w="100%"
+                        >
+                          <Text textDecor="line-through" w="50%">
+                            {choices[i]}
+                          </Text>
+                          <Text textColor="red" textAlign="start" w="50%">
+                            {" "}
+                            {v.correctAnswer}
+                          </Text>
                         </Flex>
                       );
                     })}
@@ -121,12 +137,16 @@ const Quiz: FC = () => {
                 <Button
                   mt={8}
                   h={12}
-                  w="25%"
+                  w={["90%", "70%", "25%"]}
                   bgColor="blue.300"
                   _hover={{ bgColor: "blue.500" }}
                   onClick={onClickReplay}
                 >
-                  <Text fontSize={20} textColor="white" fontWeight="bold">
+                  <Text
+                    fontSize={[16, 18, 20]}
+                    textColor="white"
+                    fontWeight="bold"
+                  >
                     다시 풀어보기
                   </Text>
                 </Button>
