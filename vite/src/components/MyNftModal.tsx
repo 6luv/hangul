@@ -20,12 +20,14 @@ interface MyNftModalProps {
   isOpen: boolean;
   onClose: () => void;
   hangulNftMetadata: IHangulNftMetadata | null;
+  isApprovedForAll: boolean;
 }
 
 const MyNftModal: FC<MyNftModalProps> = ({
   isOpen,
   onClose,
   hangulNftMetadata,
+  isApprovedForAll,
 }) => {
   const [salePrice, setSalePrice] = useState<string>("");
 
@@ -50,38 +52,55 @@ const MyNftModal: FC<MyNftModalProps> = ({
             <Text fontSize={24} fontWeight="bold" textAlign="center" w="80%">
               한글 NFT #{hangulNftMetadata?.tokenId} [{hangulNftMetadata?.name}]
             </Text>
-            <InputGroup w="70%" mt={4}>
-              <Input
-                fontSize={24}
-                value={salePrice}
-                textAlign="right"
-                onChange={(e) => setSalePrice(e.target.value)}
-              />
-              <InputRightAddon>ETH</InputRightAddon>
-            </InputGroup>
+            {isApprovedForAll && (
+              <InputGroup w="70%" mt={4}>
+                <Input
+                  fontSize={24}
+                  value={salePrice}
+                  textAlign="right"
+                  onChange={(e) => setSalePrice(e.target.value)}
+                />
+                <InputRightAddon>ETH</InputRightAddon>
+              </InputGroup>
+            )}
           </Flex>
         </ModalBody>
 
         <ModalFooter>
-          <Button
-            onClick={onClose}
-            textColor="red.500"
-            fontSize={20}
-            h={12}
-            w={20}
-            bgColor="white"
-          >
-            취소
-          </Button>
-          <Button
-            textColor="blue.500"
-            fontSize={20}
-            h={12}
-            w={20}
-            bgColor="white"
-          >
-            등록
-          </Button>
+          {isApprovedForAll ? (
+            <>
+              <Button
+                onClick={onClose}
+                textColor="red.500"
+                fontSize={20}
+                h={12}
+                w={20}
+                bgColor="white"
+              >
+                취소
+              </Button>
+              <Button
+                textColor="blue.500"
+                fontSize={20}
+                h={12}
+                w={20}
+                bgColor="white"
+              >
+                등록
+              </Button>
+            </>
+          ) : (
+            <Button
+              textColor="blue.500"
+              fontSize={20}
+              h={12}
+              w={20}
+              bgColor="white"
+              onClick={onClose}
+            >
+              확인
+            </Button>
+          )}
         </ModalFooter>
       </ModalContent>
     </Modal>

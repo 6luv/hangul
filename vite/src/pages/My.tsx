@@ -4,14 +4,29 @@ import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
 import { FiXCircle } from "react-icons/fi";
 import MyNftCard from "../components/MyNftCard";
+import { saleContractAddress } from "../lib/contractAddress";
 
 const My: FC = () => {
   const [isApprovedForAll, setIsApprovedForAll] = useState<boolean>(false);
   const [mintedList, setMintedList] = useState<number[]>();
+  const [isApproveLoading, setIsApproveLoading] = useState<boolean>(false);
   const { signer, mintContract } = useOutletContext<OutletContext>();
 
-  const onClickApprove = () => {
-    setIsApprovedForAll(!isApprovedForAll);
+  const onClickSetApprovalForAll = async () => {
+    try {
+      setIsApproveLoading(true);
+      const response = await mintContract?.setApprovalForAll(
+        saleContractAddress,
+        !isApprovedForAll
+      );
+      await response.wait();
+
+      setIsApprovedForAll(!isApprovedForAll);
+      setIsApproveLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsApproveLoading(false);
+    }
   };
 
   const getBalanceOfNfts = async () => {
@@ -57,7 +72,10 @@ const My: FC = () => {
               </Text>
               <Button
                 colorScheme={isApprovedForAll ? "red" : "green"}
-                onClick={onClickApprove}
+                onClick={onClickSetApprovalForAll}
+                isDisabled={isApproveLoading}
+                isLoading={isApproveLoading}
+                loadingText={isApprovedForAll ? "거부중" : "승인중"}
               >
                 {isApprovedForAll ? "거부" : "승인"}
               </Button>
@@ -86,7 +104,14 @@ const My: FC = () => {
               >
                 {mintedList?.map((v, i) => {
                   if (v > 0) {
-                    return <MyNftCard key={i} tokenId={i + 1} amount={v} />;
+                    return (
+                      <MyNftCard
+                        key={i}
+                        tokenId={i + 1}
+                        amount={v}
+                        isApprovedForAll={isApprovedForAll}
+                      />
+                    );
                   }
                 })}
               </Grid>

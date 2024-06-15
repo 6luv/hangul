@@ -3,14 +3,19 @@ import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
 import axios from "axios";
-import MyNftModal from "./SaleModal";
+import MyNftModal from "./MyNftModal";
 
 interface MyNftCardProps {
   tokenId: number;
   amount: number;
+  isApprovedForAll: boolean;
 }
 
-const MyNftCard: FC<MyNftCardProps> = ({ tokenId, amount }) => {
+const MyNftCard: FC<MyNftCardProps> = ({
+  tokenId,
+  amount,
+  isApprovedForAll,
+}) => {
   const [hangulNftMetadata, setHangulNftMetadata] =
     useState<IHangulNftMetadata | null>(null);
   const { mintContract } = useOutletContext<OutletContext>();
@@ -69,6 +74,7 @@ const MyNftCard: FC<MyNftCardProps> = ({ tokenId, amount }) => {
         isOpen={isOpen}
         onClose={onClose}
         hangulNftMetadata={hangulNftMetadata}
+        isApprovedForAll={isApprovedForAll}
       />
     </>
   );
