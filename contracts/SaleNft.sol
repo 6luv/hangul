@@ -26,7 +26,8 @@ contract SaleNft {
         require(mintNftContract.balanceOf(msg.sender, _tokenId) > 0, "Caller is not token owner.");
         require(_price > 0, "Price is zero.");
         require(mintNftContract.isApprovedForAll(msg.sender, address(this)), "Token owner did not approve token.");
-
+        require(canSell(msg.sender, _tokenId), "Unable to register.");
+        
         Sale memory sale = Sale({
             saleId: saleCounter,
             tokenId: _tokenId,
@@ -73,5 +74,21 @@ contract SaleNft {
 
     function getOwner(uint _saleId) public view returns (address) {
         return sales[_saleId].saller;
+    }
+
+    function getSaleNftCount(address _owner, uint _tokenId) public view returns (uint) {
+        uint saleNftCount;
+        for (uint i = 0; i < onSaleTokens.length; i ++) {
+            if (onSaleTokens[i].tokenId == _tokenId && onSaleTokens[i].saller == _owner) {
+                saleNftCount++;
+            }
+        }
+            
+        return saleNftCount;
+    }
+
+
+    function canSell(address _owner, uint _tokenId) public view returns (bool) {
+        return mintNftContract.balanceOf(_owner, _tokenId) > getSaleNftCount(_owner, _tokenId);
     }
 }
