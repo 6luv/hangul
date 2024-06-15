@@ -71,7 +71,6 @@ contract SaleNft {
     }
 
     function getOwner(uint _saleId) public view returns (address) {
-        require(_saleId > saleCounter, "Invalid saleId");
         return sales[_saleId].saller;
     }
 }
