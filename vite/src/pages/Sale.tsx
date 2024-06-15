@@ -1,9 +1,10 @@
-import { Flex, Grid } from "@chakra-ui/react";
+import { Flex, Grid, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
 import { formatEther } from "ethers";
 import SaleNftCard from "../components/SaleNftCard";
+import { FiXCircle } from "react-icons/fi";
 
 const Sale: FC = () => {
   const [saleTokens, setSaleTokens] = useState<ISaleNftMetadata[]>([]);
@@ -46,29 +47,48 @@ const Sale: FC = () => {
         alignItems="center"
         flexDir="column"
       >
-        <Grid
-          templateColumns={[
-            "repeat(1, 1fr)",
-            "repeat(2, 1fr)",
-            "repeat(2, 1fr)",
-            "repeat(3, 1fr)",
-            "repeat(4, 1fr)",
-          ]}
-          justifyContent="center"
-          gap={16}
-          maxH={[375, 420, 520]}
-          overflowY="auto"
-          mt={[2, 2, 0, 0]}
-        >
-          {saleTokens.map((v, i) => (
-            <SaleNftCard
-              key={i}
-              tokenId={v.tokenId}
-              saleId={v.saleId}
-              price={v.price}
-            />
-          ))}
-        </Grid>
+        {signer ? (
+          <Grid
+            templateColumns={[
+              "repeat(1, 1fr)",
+              "repeat(2, 1fr)",
+              "repeat(2, 1fr)",
+              "repeat(3, 1fr)",
+              "repeat(4, 1fr)",
+            ]}
+            justifyContent="center"
+            gap={16}
+            maxH={[375, 420, 520]}
+            overflowY="auto"
+            mt={[2, 2, 0, 0]}
+          >
+            {saleTokens.map((v, i) => (
+              <SaleNftCard
+                key={i}
+                tokenId={v.tokenId}
+                saleId={v.saleId}
+                price={v.price}
+              />
+            ))}
+          </Grid>
+        ) : (
+          <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
+            <Flex
+              w="2xl"
+              h={40}
+              rounded="2xl"
+              border="2px"
+              boxShadow="lg"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <FiXCircle size={72} color="red" />
+              <Text fontSize={48} fontWeight="bold" ml={8}>
+                로그인 후 이용해 주세요!
+              </Text>
+            </Flex>
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );
