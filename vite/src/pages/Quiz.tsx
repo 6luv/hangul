@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import QuizCard from "../components/QuizCard";
 import quizData from "../data/quizData.json";
@@ -98,7 +98,7 @@ const Quiz: FC = () => {
                   borderColor="gray.200"
                   boxShadow="md"
                   rounded="lg"
-                  w={["90%", "70%", "40%"]}
+                  w={["90%", "70%", "50%"]}
                   h={[200, 300, 400]}
                   my={4}
                 >
@@ -120,12 +120,12 @@ const Quiz: FC = () => {
                           fontSize={[24, 32, 40]}
                           fontWeight="bold"
                           gap={4}
-                          w="100%"
+                          w="140%"
                         >
                           <Text textDecor="line-through" w="50%">
                             {choices[i]}
                           </Text>
-                          <Text textColor="red" textAlign="start" w="50%">
+                          <Text textColor="red" textAlign="start" w="70%">
                             {" "}
                             {v.correctAnswer}
                           </Text>

@@ -17,3 +17,15 @@ interface IHangulNftMetadata extends INftMetadata {
   tokenId: number;
   amount: number;
 }
+
+interface IHangulPriceNftMetadata extends IHangulNftMetadata {
+  saleId: number;
+  price: bigint;
+}
+
+interface ISaleNftMetadata {
+  saleId: number;
+  tokenId: number;
+  price: string;
+  saller: string;
+}
