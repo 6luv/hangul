@@ -5,6 +5,9 @@ import quizData from "../data/quizData.json";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
 
+const maxQuizIndex = 29;
+const minQuizIndex = 0;
+
 const Quiz: FC = () => {
   const [start, setStart] = useState<boolean>(false);
   const [currentQuizIndex, setCurrentQuizIndex] = useState<number>(0);
@@ -25,7 +28,9 @@ const Quiz: FC = () => {
     const tempIndex = new Set();
 
     while (tempQuiz.length < 5) {
-      const randomIndex = Math.floor(Math.random() * (22 - 0 + 1)) + 0;
+      const randomIndex =
+        Math.floor(Math.random() * (maxQuizIndex - minQuizIndex + 1)) +
+        minQuizIndex;
 
       if (!tempIndex.has(randomIndex)) {
         tempQuiz.push(quizData[randomIndex]);

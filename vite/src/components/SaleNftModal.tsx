@@ -12,7 +12,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { formatEther } from "ethers";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { OutletContext } from "./Layout";
 
 interface SaleNftModalProps {
   isOpen: boolean;
@@ -27,6 +29,26 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
   nftMetadata,
   isTokenOwner,
 }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { saleContract } = useOutletContext<OutletContext>();
+
+  const onClickPurchaseNft = async () => {
+    try {
+      setIsLoading(true);
+      if (!saleContract || !nftMetadata) return;
+
+      const response = await saleContract.purchaseNft(nftMetadata.saleId, {
+        value: nftMetadata.price,
+      });
+      await response.wait();
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -64,7 +86,14 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button fontSize={20} h={12} w={20} bgColor="white" onClick={onClose}>
+          <Button
+            fontSize={20}
+            h={12}
+            w={20}
+            bgColor="white"
+            onClick={onClose}
+            isDisabled={isLoading}
+          >
             취소
           </Button>
           <Button
@@ -73,8 +102,10 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
             h={12}
             w={20}
             bgColor="white"
-            onClick={onClose}
-            isDisabled={isTokenOwner}
+            onClick={onClickPurchaseNft}
+            isDisabled={isTokenOwner || isLoading}
+            isLoading={isLoading}
+            loadingText="구매중"
           >
             구매
           </Button>
