@@ -29,6 +29,19 @@ const My: FC = () => {
     }
   };
 
+  const getIsApprovedForAll = async () => {
+    try {
+      const response = await mintContract?.isApprovedForAll(
+        signer?.address,
+        saleContractAddress
+      );
+
+      setIsApprovedForAll(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const getBalanceOfNfts = async () => {
     try {
       const response = await mintContract?.balanceOfNfts(signer?.address);
@@ -41,6 +54,12 @@ const My: FC = () => {
 
   useEffect(() => {
     getBalanceOfNfts();
+  }, [signer, mintContract]);
+
+  useEffect(() => {
+    if (!signer || !mintContract) return;
+
+    getIsApprovedForAll();
   }, [signer, mintContract]);
 
   useEffect(() => console.log(mintedList), [mintedList]);
