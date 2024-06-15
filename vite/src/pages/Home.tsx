@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import { FC } from "react";
+import SlideNfts from "../components/SlideNfts";
 
 const Home: FC = () => {
   return (
@@ -11,8 +12,9 @@ const Home: FC = () => {
         bgColor="white"
         rounded="lg"
         boxShadow="md"
+        alignItems="center"
       >
-        Home
+        <SlideNfts />
       </Flex>
     </Flex>
   );
