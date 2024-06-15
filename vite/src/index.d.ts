@@ -26,6 +26,6 @@ interface IHangulPriceNftMetadata extends IHangulNftMetadata {
 interface ISaleNftMetadata {
   saleId: number;
   tokenId: number;
-  price: string;
+  price: bigint;
   saller: string;
 }

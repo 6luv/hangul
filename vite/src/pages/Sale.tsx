@@ -2,7 +2,7 @@ import { Flex, Grid, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
-import { formatEther } from "ethers";
+
 import SaleNftCard from "../components/SaleNftCard";
 import { FiXCircle } from "react-icons/fi";
 
@@ -17,7 +17,7 @@ const Sale: FC = () => {
       const tempSaleTokens: ISaleNftMetadata[] = response.map((v: any) => ({
         saleId: Number(v[0]),
         tokenId: Number(v[1]),
-        price: formatEther(v[2]),
+        price: v[2],
         saller: v[3],
       }));
 
