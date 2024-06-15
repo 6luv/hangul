@@ -14,13 +14,17 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { OutletContext } from "./Layout";
+import { parseEther } from "ethers";
 
 interface MyNftModalProps {
   isOpen: boolean;
   onClose: () => void;
   hangulNftMetadata: IHangulNftMetadata | null;
   isApprovedForAll: boolean;
+  tokenId: number;
 }
 
 const MyNftModal: FC<MyNftModalProps> = ({
@@ -28,8 +32,34 @@ const MyNftModal: FC<MyNftModalProps> = ({
   onClose,
   hangulNftMetadata,
   isApprovedForAll,
+  tokenId,
 }) => {
   const [salePrice, setSalePrice] = useState<string>("");
+  const [currentPrice, setCurrentPrice] = useState<bigint>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { saleContract } = useOutletContext<OutletContext>();
+
+  const onClickSetForSaleNft = async () => {
+    try {
+      setIsLoading(true);
+      if (!salePrice || isNaN(Number(salePrice))) return;
+
+      const response = await saleContract?.setForSaleNft(
+        tokenId,
+        parseEther(salePrice)
+      );
+      await response.wait();
+
+      setCurrentPrice(parseEther(salePrice));
+      setIsLoading(false);
+      onClose();
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => console.log(currentPrice), [currentPrice]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -85,6 +115,10 @@ const MyNftModal: FC<MyNftModalProps> = ({
                 h={12}
                 w={20}
                 bgColor="white"
+                onClick={onClickSetForSaleNft}
+                isDisabled={isLoading}
+                isLoading={isLoading}
+                loadingText="등록중"
               >
                 등록
               </Button>
