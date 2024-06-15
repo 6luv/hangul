@@ -23,10 +23,9 @@ contract SaleNft {
     }
 
     function setForSaleNft(uint _tokenId, uint _price) public {
-        require(msg.sender == mintNftContract.ownerOf(_tokenId), "Caller is not token owner.");
+        require(mintNftContract.balanceOf(msg.sender, _tokenId) > 0, "Caller is not token owner.");
         require(_price > 0, "Price is zero.");
         require(mintNftContract.isApprovedForAll(msg.sender, address(this)), "Token owner did not approve token.");
-        require(mintNftContract.balanceOf(msg.sender, _tokenId) > 0, "No token owned.");
 
         Sale memory sale = Sale({
             saleId: saleCounter,
@@ -63,11 +62,16 @@ contract SaleNft {
         return onSaleTokens;
     }
 
-    function getSaleToken(uint _saleId) public view returns (Sale memory) {
+    function getOnSaleToken(uint _saleId) public view returns (Sale memory) {
         return sales[_saleId];
     }
 
     function getTokenPrice(uint _saleId) public view returns (uint) {
         return sales[_saleId].price;
+    }
+
+    function getOwner(uint _saleId) public view returns (address) {
+        require(_saleId > saleCounter, "Invalid saleId");
+        return sales[_saleId].saller;
     }
 }

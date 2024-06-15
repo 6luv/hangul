@@ -36,9 +36,4 @@ contract MintNft is ERC1155 {
 
         return result;
     }
-
-    function ownerOf(uint _tokenId) public view returns(address) {
-        require(_tokenId > 0 && _tokenId <= 38, "Invalid tokenId");
-        return owners[_tokenId];
-    }
 }
