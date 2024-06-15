@@ -18,12 +18,14 @@ interface SaleNftModalProps {
   isOpen: boolean;
   onClose: () => void;
   nftMetadata: IHangulPriceNftMetadata | null;
+  isTokenOwner: boolean;
 }
 
 const SaleNftModal: FC<SaleNftModalProps> = ({
   isOpen,
   onClose,
   nftMetadata,
+  isTokenOwner,
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -72,6 +74,7 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
             w={20}
             bgColor="white"
             onClick={onClose}
+            isDisabled={isTokenOwner}
           >
             구매
           </Button>

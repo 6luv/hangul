@@ -16,7 +16,9 @@ const SaleNftCard: FC<SaleNftCardProps> = ({ tokenId, saleId, price }) => {
   const [nftMetadata, setNftMetadata] =
     useState<IHangulPriceNftMetadata | null>(null);
   const [amount, setAmount] = useState<number>(1);
-  const { mintContract, saleContract } = useOutletContext<OutletContext>();
+  const [isTokenOwner, setIsTokenOwner] = useState<boolean>(false);
+  const { signer, mintContract, saleContract } =
+    useOutletContext<OutletContext>();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const getNftMetadata = async () => {
@@ -36,12 +38,29 @@ const SaleNftCard: FC<SaleNftCardProps> = ({ tokenId, saleId, price }) => {
     }
   };
 
+  const getTokenOwner = async () => {
+    try {
+      if (!signer || !saleContract || !nftMetadata) return;
+
+      const response = await saleContract?.getOwner(nftMetadata?.saleId);
+      setIsTokenOwner(response === signer.address);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (!mintContract || !saleContract || !tokenId) return;
 
     getNftMetadata();
     setAmount(1);
   }, [mintContract, saleContract, tokenId]);
+
+  useEffect(() => {
+    if (!signer || !saleContract || !nftMetadata) return;
+
+    getTokenOwner();
+  }, [signer, saleContract, nftMetadata]);
 
   return (
     <>
@@ -78,6 +97,7 @@ const SaleNftCard: FC<SaleNftCardProps> = ({ tokenId, saleId, price }) => {
         isOpen={isOpen}
         onClose={onClose}
         nftMetadata={nftMetadata}
+        isTokenOwner={isTokenOwner}
       />
     </>
   );

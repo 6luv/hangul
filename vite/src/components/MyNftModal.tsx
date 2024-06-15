@@ -14,7 +14,7 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
 import { parseEther } from "ethers";
@@ -35,7 +35,6 @@ const MyNftModal: FC<MyNftModalProps> = ({
   tokenId,
 }) => {
   const [salePrice, setSalePrice] = useState<string>("");
-  const [currentPrice, setCurrentPrice] = useState<bigint>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { saleContract } = useOutletContext<OutletContext>();
 
@@ -50,7 +49,6 @@ const MyNftModal: FC<MyNftModalProps> = ({
       );
       await response.wait();
 
-      setCurrentPrice(parseEther(salePrice));
       setIsLoading(false);
       onClose();
     } catch (error) {
@@ -58,8 +56,6 @@ const MyNftModal: FC<MyNftModalProps> = ({
       setIsLoading(false);
     }
   };
-
-  useEffect(() => console.log(currentPrice), [currentPrice]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -106,6 +102,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
                 h={12}
                 w={20}
                 bgColor="white"
+                isDisabled={isLoading}
               >
                 취소
               </Button>
