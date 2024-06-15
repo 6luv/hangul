@@ -22,10 +22,16 @@ const Quiz: FC = () => {
   const getCurrentQuizList = () => {
     const tempQuiz = [];
     const tempQuizIndex = [];
-    for (let i = 0; i < 5; i++) {
+    const tempIndex = new Set();
+
+    while (tempQuiz.length < 5) {
       const randomIndex = Math.floor(Math.random() * (22 - 0 + 1)) + 0;
-      tempQuiz.push(quizData[randomIndex]);
-      tempQuizIndex.push(randomIndex);
+
+      if (!tempIndex.has(randomIndex)) {
+        tempQuiz.push(quizData[randomIndex]);
+        tempQuizIndex.push(randomIndex);
+        tempIndex.add(randomIndex);
+      }
     }
 
     setQuizList(tempQuiz);
