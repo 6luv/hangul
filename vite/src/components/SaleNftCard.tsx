@@ -43,8 +43,6 @@ const SaleNftCard: FC<SaleNftCardProps> = ({ tokenId, saleId, price }) => {
     setAmount(1);
   }, [mintContract, saleContract, tokenId]);
 
-  useEffect(() => console.log(nftMetadata?.price), []);
-
   return (
     <>
       <GridItem display="flex" flexDir="column" w={[40, 48, 48, 48]}>
