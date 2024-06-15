@@ -80,7 +80,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
               alt={hangulNftMetadata?.name}
             />
             <Text fontSize={24} fontWeight="bold" textAlign="center" w="80%">
-              한글 NFT #{hangulNftMetadata?.tokenId} [{hangulNftMetadata?.name}]
+              한글 NFT #{tokenId} [{hangulNftMetadata?.name}]
             </Text>
             {isApprovedForAll && (
               <InputGroup w="70%" mt={4}>
