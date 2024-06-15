@@ -46,6 +46,7 @@ contract SaleNft {
         require(msg.value >= sale.price, "Caller sent lower than price.");
         require(mintNftContract.balanceOf(sale.saller, sale.tokenId) > 0, "Token is not sale.");
 
+        payable(sale.saller).transfer(msg.value);
         mintNftContract.safeTransferFrom(sale.saller, msg.sender, sale.tokenId, 1, "");
 
         delete sales[_saleId];
