@@ -1,9 +1,10 @@
-import { Box, GridItem, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
 import axios from "axios";
 import MyNftModal from "./MyNftModal";
+import NftCard from "./NftCard";
 
 interface MyNftCardProps {
   tokenId: number;
@@ -40,36 +41,15 @@ const MyNftCard: FC<MyNftCardProps> = ({
 
   return (
     <>
-      <GridItem display="flex" flexDir="column" w={[40, 48, 48, 48]}>
-        <Box pos="relative">
-          <Text
-            pos="absolute"
-            top={2}
-            right={2}
-            fontSize={20}
-            fontWeight="semibold"
-            rounded="lg"
-            px={1}
-          >
-            x{amount}
-          </Text>
-          <Image
-            src={hangulNftMetadata?.image}
-            alt={hangulNftMetadata?.name}
-            bgColor="white"
-            rounded="lg"
-            border="1px"
-            boxShadow="xl"
-            p={4}
-            onClick={onOpen}
-            cursor="pointer"
-            _hover={{ bgColor: "gray.200", opacity: "150%" }}
-          />
-          <Text mt={4} fontSize={20} fontWeight="bold" textAlign="center">
-            #{hangulNftMetadata?.tokenId} {hangulNftMetadata?.name}
-          </Text>
-        </Box>
-      </GridItem>
+      {hangulNftMetadata && (
+        <NftCard
+          name={hangulNftMetadata?.name}
+          image={hangulNftMetadata?.image}
+          tokenId={hangulNftMetadata?.tokenId}
+          amount={hangulNftMetadata?.amount}
+          onOpen={onOpen}
+        />
+      )}
       <MyNftModal
         isOpen={isOpen}
         onClose={onClose}

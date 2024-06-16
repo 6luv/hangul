@@ -1,10 +1,10 @@
-import { GridItem, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
 import axios from "axios";
 import SaleNftModal from "./SaleNftModal";
-import { formatEther } from "ethers";
+import NftCard from "./NftCard";
 
 interface SaleNftCardProps {
   tokenId: number;
@@ -64,35 +64,15 @@ const SaleNftCard: FC<SaleNftCardProps> = ({ tokenId, saleId, price }) => {
 
   return (
     <>
-      <GridItem display="flex" flexDir="column" w={[40, 48, 48, 48]}>
-        <Image
-          src={nftMetadata?.image}
-          alt={nftMetadata?.name}
-          bgColor="white"
-          rounded="lg"
-          border="1px"
-          boxShadow="xl"
-          p={4}
-          cursor="pointer"
-          _hover={{ bgColor: "gray.200", opacity: "150%" }}
-          onClick={onOpen}
+      {nftMetadata && (
+        <NftCard
+          name={nftMetadata.name}
+          image={nftMetadata.image}
+          tokenId={nftMetadata.tokenId}
+          price={nftMetadata.price}
+          onOpen={onOpen}
         />
-        <Text mt={4} fontSize={20} fontWeight="bold" textAlign="center">
-          #{nftMetadata?.tokenId} {nftMetadata?.name}
-        </Text>
-        {nftMetadata?.price ? (
-          <Text
-            fontSize={16}
-            fontWeight="bold"
-            textAlign="center"
-            textColor="blue.500"
-          >
-            {formatEther(nftMetadata.price)} ETH
-          </Text>
-        ) : (
-          ""
-        )}
-      </GridItem>
+      )}
       <SaleNftModal
         isOpen={isOpen}
         onClose={onClose}
