@@ -46,6 +46,7 @@ const Create: FC = () => {
 
   useEffect(() => {
     getBalanceOfNfts();
+    setCanvasList([]);
   }, [signer, mintContract]);
 
   return (
@@ -60,7 +61,7 @@ const Create: FC = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Flex bgColor="green.100" w="84%" h="100%">
+        <Flex w="80%" h="100%">
           {canvasList.map((v, i) => (
             <Rnd
               default={{
@@ -76,14 +77,14 @@ const Create: FC = () => {
                 h={28}
                 src={`/images/nfts/${v + 1}.png`}
                 alt=""
-                onDragStart={() => removeFromCanvas(i)}
+                draggable={true}
+                onDoubleClick={() => removeFromCanvas(i)}
               />
             </Rnd>
           ))}
         </Flex>
         <Flex
-          w="16%"
-          bgColor="red.100"
+          w="20%"
           borderLeft="2px"
           flexDir="column"
           alignItems="center"
@@ -93,11 +94,11 @@ const Create: FC = () => {
           {mintedList?.map((v, i) => {
             if (v > 0) {
               return (
-                <Flex flexDir="column" alignItems="center">
+                <Flex flexDir="column" alignItems="center" my={2}>
                   <Box pos="relative">
                     <Text
                       pos="absolute"
-                      top={8}
+                      top={4}
                       right={2}
                       fontSize={20}
                       fontWeight="semibold"
@@ -106,7 +107,7 @@ const Create: FC = () => {
                     >
                       x{v}
                     </Text>
-                    <Box mt={8} p={4} boxShadow="lg" rounded="lg">
+                    <Box mt={4} p={4} boxShadow="lg" rounded="lg">
                       <Image
                         w={28}
                         h={28}
