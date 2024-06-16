@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
 import SaleNftCard from "../components/SaleNftCard";
-import { FiXCircle } from "react-icons/fi";
+import LoginNotice from "../components/LoginNotice";
 
 const Sale: FC = () => {
   const [saleTokens, setSaleTokens] = useState<ISaleNftMetadata[]>([]);
@@ -92,22 +92,7 @@ const Sale: FC = () => {
             </Flex>
           </>
         ) : (
-          <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
-            <Flex
-              w="2xl"
-              h={40}
-              rounded="2xl"
-              border="2px"
-              boxShadow="lg"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <FiXCircle size={72} color="red" />
-              <Text fontSize={48} fontWeight="bold" ml={8}>
-                로그인 후 이용해 주세요!
-              </Text>
-            </Flex>
-          </Flex>
+          <LoginNotice />
         )}
       </Flex>
     </Flex>

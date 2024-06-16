@@ -2,9 +2,9 @@ import { Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
-import { FiXCircle } from "react-icons/fi";
 import MyNftCard from "../components/MyNftCard";
 import { saleContractAddress } from "../lib/contractAddress";
+import LoginNotice from "../components/LoginNotice";
 
 const My: FC = () => {
   const [isApprovedForAll, setIsApprovedForAll] = useState<boolean>(false);
@@ -137,22 +137,7 @@ const My: FC = () => {
             </Flex>
           </>
         ) : (
-          <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
-            <Flex
-              w="2xl"
-              h={40}
-              rounded="2xl"
-              border="2px"
-              boxShadow="lg"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <FiXCircle size={72} color="red" />
-              <Text fontSize={48} fontWeight="bold" ml={8}>
-                로그인 후 이용해 주세요!
-              </Text>
-            </Flex>
-          </Flex>
+          <LoginNotice />
         )}
       </Flex>
     </Flex>

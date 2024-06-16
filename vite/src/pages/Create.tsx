@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
 import { Rnd } from "react-rnd";
+import LoginNotice from "../components/LoginNotice";
 
 const Create: FC = () => {
   const [mintedList, setMintedList] = useState<number[]>([]);
@@ -61,68 +62,74 @@ const Create: FC = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Flex w="80%" h="100%">
-          {canvasList.map((v, i) => (
-            <Rnd
-              default={{
-                x: 0,
-                y: 0,
-                width: 100,
-                height: 100,
-              }}
-              disableDragging={false}
+        {signer ? (
+          <>
+            <Flex w={["0%", "0%", "80%"]} h="100%">
+              {canvasList.map((v, i) => (
+                <Rnd
+                  default={{
+                    x: 0,
+                    y: 0,
+                    width: 100,
+                    height: 100,
+                  }}
+                  disableDragging={false}
+                >
+                  <Image
+                    w={28}
+                    h={28}
+                    src={`/images/nfts/${v + 1}.png`}
+                    alt=""
+                    draggable={true}
+                    onDoubleClick={() => removeFromCanvas(i)}
+                  />
+                </Rnd>
+              ))}
+            </Flex>
+            <Flex
+              w={["30%", "30%", "20%"]}
+              borderLeft="2px"
+              flexDir="column"
+              alignItems="center"
+              overflowY="auto"
+              maxH={[200, 200, 450, 450, 550, 700]}
             >
-              <Image
-                w={28}
-                h={28}
-                src={`/images/nfts/${v + 1}.png`}
-                alt=""
-                draggable={true}
-                onDoubleClick={() => removeFromCanvas(i)}
-              />
-            </Rnd>
-          ))}
-        </Flex>
-        <Flex
-          w="20%"
-          borderLeft="2px"
-          flexDir="column"
-          alignItems="center"
-          overflowY="auto"
-          maxH={500}
-        >
-          {mintedList?.map((v, i) => {
-            if (v > 0) {
-              return (
-                <Flex flexDir="column" alignItems="center" my={2}>
-                  <Box pos="relative">
-                    <Text
-                      pos="absolute"
-                      top={4}
-                      right={2}
-                      fontSize={20}
-                      fontWeight="semibold"
-                      rounded="lg"
-                      px={1}
-                    >
-                      x{v}
-                    </Text>
-                    <Box mt={4} p={4} boxShadow="lg" rounded="lg">
-                      <Image
-                        w={28}
-                        h={28}
-                        src={`/images/nfts/${i + 1}.png`}
-                        alt=""
-                        draggable="true"
-                        onClick={() => addToCanvas(i)}
-                      />
-                    </Box>
-                  </Box>
-                </Flex>
-              );
-            }
-          })}
-        </Flex>
+              {mintedList?.map((v, i) => {
+                if (v > 0) {
+                  return (
+                    <Flex flexDir="column" alignItems="center" my={2}>
+                      <Box pos="relative">
+                        <Text
+                          pos="absolute"
+                          top={4}
+                          right={2}
+                          fontSize={20}
+                          fontWeight="semibold"
+                          rounded="lg"
+                          px={1}
+                        >
+                          x{v}
+                        </Text>
+                        <Box mt={4} p={4} boxShadow="lg" rounded="lg">
+                          <Image
+                            w={28}
+                            h={28}
+                            src={`/images/nfts/${i + 1}.png`}
+                            alt=""
+                            draggable="true"
+                            onClick={() => addToCanvas(i)}
+                          />
+                        </Box>
+                      </Box>
+                    </Flex>
+                  );
+                }
+              })}
+            </Flex>
+          </>
+        ) : (
+          <LoginNotice />
+        )}
       </Flex>
     </Flex>
   );
