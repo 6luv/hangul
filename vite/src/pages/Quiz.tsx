@@ -109,8 +109,8 @@ const Quiz: FC = () => {
                   borderColor="gray.200"
                   boxShadow="md"
                   rounded="lg"
-                  w={["90%", "70%", "50%"]}
-                  h={[200, 300, 400]}
+                  w={["100%", "70%", "35%"]}
+                  h={[200, 250, 250]}
                   my={4}
                 >
                   <Flex flexDir="column" alignItems="start">
@@ -118,7 +118,7 @@ const Quiz: FC = () => {
                       return v.correctAnswer === choices[i] ? (
                         <Text
                           key={i}
-                          fontSize={[24, 32, 40]}
+                          fontSize={[24, 32, 32]}
                           fontWeight="bold"
                           textColor="blue.500"
                           w="100%"
@@ -128,7 +128,7 @@ const Quiz: FC = () => {
                       ) : (
                         <Flex
                           key={i}
-                          fontSize={[24, 32, 40]}
+                          fontSize={[24, 32, 32]}
                           fontWeight="bold"
                           gap={4}
                           w="140%"
@@ -137,7 +137,6 @@ const Quiz: FC = () => {
                             {choices[i]}
                           </Text>
                           <Text textColor="red" textAlign="start" w="70%">
-                            {" "}
                             {v.correctAnswer}
                           </Text>
                         </Flex>

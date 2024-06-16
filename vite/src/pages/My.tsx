@@ -119,7 +119,7 @@ const My: FC = () => {
                 gap={16}
                 maxH={[375, 420, 520]}
                 overflowY="auto"
-                mt={[2, 2, 0, 0]}
+                mt={[2, 2, 2, 2]}
               >
                 {mintedList?.map((v, i) => {
                   if (v > 0) {

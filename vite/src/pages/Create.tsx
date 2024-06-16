@@ -2,6 +2,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
+import { Rnd } from "react-rnd";
 
 const Create: FC = () => {
   const [mintedList, setMintedList] = useState<number[]>([]);
@@ -29,12 +30,23 @@ const Create: FC = () => {
     setCanvasList([...canvasList, index]);
   };
 
+  const removeFromCanvas = (index: number) => {
+    const removedItem = canvasList[index];
+    const updatedMintedList = mintedList.map((v, i) => {
+      if (i === removedItem) {
+        return v + 1;
+      }
+      return v;
+    });
+    setMintedList(updatedMintedList);
+
+    const updatedCanvasList = canvasList.filter((_, i) => i !== index);
+    setCanvasList(updatedCanvasList);
+  };
+
   useEffect(() => {
     getBalanceOfNfts();
   }, [signer, mintContract]);
-
-  useEffect(() => console.log("minted: ", mintedList), [mintedList]);
-  useEffect(() => console.log("canvas: ", canvasList), [canvasList]);
 
   return (
     <Flex flexDir="column" w="100%">
@@ -49,18 +61,34 @@ const Create: FC = () => {
         justifyContent="space-between"
       >
         <Flex bgColor="green.100" w="84%" h="100%">
-          {canvasList.map((v) => (
-            <Image w={28} h={28} src={`/images/nfts/${v + 1}.png`} alt="" />
+          {canvasList.map((v, i) => (
+            <Rnd
+              default={{
+                x: 0,
+                y: 0,
+                width: 100,
+                height: 100,
+              }}
+              disableDragging={false}
+            >
+              <Image
+                w={28}
+                h={28}
+                src={`/images/nfts/${v + 1}.png`}
+                alt=""
+                onDragStart={() => removeFromCanvas(i)}
+              />
+            </Rnd>
           ))}
-          <Text>그림판</Text>
         </Flex>
         <Flex
           w="16%"
-          h="100%"
           bgColor="red.100"
           borderLeft="2px"
           flexDir="column"
           alignItems="center"
+          overflowY="auto"
+          maxH={500}
         >
           {mintedList?.map((v, i) => {
             if (v > 0) {
