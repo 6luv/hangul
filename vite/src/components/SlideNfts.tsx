@@ -13,10 +13,11 @@ const SlideNfts: FC = () => {
     infinite: true,
     slidesToShow: 5,
     autoplay: true,
-    speed: 500,
-    autoplaySpeed: 2000,
+    speed: 3000,
+    autoplaySpeed: 0,
     centerPadding: "200px",
     arrows: false,
+    cssEase: "linear",
   };
 
   return (
@@ -31,6 +32,7 @@ const SlideNfts: FC = () => {
                 alt={`${i}.png`}
                 border="2px"
                 rounded="lg"
+                boxShadow="lg"
                 p={2}
                 w={40}
               />
