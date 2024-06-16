@@ -6,6 +6,7 @@ import Quiz from "./pages/Quiz";
 import Mint from "./pages/Mint";
 import My from "./pages/My";
 import Sale from "./pages/Sale";
+import Create from "./pages/Create";
 
 const App: FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: FC = () => {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/mint" element={<Mint />} />
           <Route path="/sale" element={<Sale />} />
+          <Route path="/create" element={<Create />} />
           <Route path="/my" element={<My />} />
         </Route>
       </Routes>

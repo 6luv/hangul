@@ -36,6 +36,10 @@ const headerNavLinks = [
     path: "/sale",
   },
   {
+    name: "창작",
+    path: "/create",
+  },
+  {
     name: "내 페이지",
     path: "/my",
   },
@@ -62,7 +66,11 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
         <Box mr={2} bgColor="orange" p="6px" rounded="full" />
         <Box bgColor="green" p="6px" rounded="full" />
       </Flex>
-      <Flex w="35%" display={["none", "none", "flex"]} gap={20}>
+      <Flex
+        w={["70%", "50%", "46%"]}
+        display={["none", "none", "flex"]}
+        gap={[4, 8, 20]}
+      >
         {headerNavLinks.map((v, i) => (
           <Button
             key={i}
