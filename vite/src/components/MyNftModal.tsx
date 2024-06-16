@@ -106,6 +106,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
                   fontSize={24}
                   value={salePrice}
                   textAlign="right"
+                  isDisabled={isLoading}
                   onChange={(e) => setSalePrice(e.target.value)}
                 />
                 <InputRightAddon>ETH</InputRightAddon>
