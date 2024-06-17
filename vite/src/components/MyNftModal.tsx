@@ -13,6 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
@@ -38,6 +39,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [canSell, setCanSell] = useState<boolean>(false);
   const navigate = useNavigate();
+  const toast = useToast();
   const { signer, saleContract } = useOutletContext<OutletContext>();
 
   const onClickSetForSaleNft = async () => {
@@ -53,10 +55,12 @@ const MyNftModal: FC<MyNftModalProps> = ({
 
       setIsLoading(false);
       onClose();
+      getToast("등록 성공!", "판매 등록되었습니다.", "success");
       navigate("/sale");
     } catch (error) {
       console.error(error);
       setIsLoading(false);
+      getToast("등록 실패", "판매 등록에 실패했습니다.", "error");
     }
   };
 
@@ -73,6 +77,20 @@ const MyNftModal: FC<MyNftModalProps> = ({
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const getToast = (
+    title: string,
+    description: string,
+    status: "success" | "error" | "warning" | "info" | "loading"
+  ) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   useEffect(() => {

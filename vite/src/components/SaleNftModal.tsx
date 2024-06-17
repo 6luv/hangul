@@ -10,6 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { formatEther } from "ethers";
 import { FC, useState } from "react";
@@ -31,6 +32,7 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const toast = useToast();
   const { saleContract } = useOutletContext<OutletContext>();
 
   const onClickPurchaseNft = async () => {
@@ -45,11 +47,27 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
 
       setIsLoading(false);
       onClose();
+      getToast("구매 성공!", "구매 되었습니다.", "success");
       navigate("/my");
     } catch (error) {
       console.error(error);
       setIsLoading(false);
+      getToast("구매 실패", "구매 되지 않았습니다.", "error");
     }
+  };
+
+  const getToast = (
+    title: string,
+    description: string,
+    status: "success" | "error" | "warning" | "info" | "loading"
+  ) => {
+    toast({
+      title,
+      description,
+      status,
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   return (
