@@ -146,23 +146,17 @@ const MyNftModal: FC<MyNftModalProps> = ({
 
         <ModalFooter>
           <Button
+            className="modalButtonStyle"
             onClick={onClose}
             textColor={isApprovedForAll ? "red.500" : "blue.500"}
-            fontSize={20}
-            h={12}
-            w={20}
-            bgColor="white"
             isDisabled={isLoading}
           >
             {isApprovedForAll ? "취소" : "확인"}
           </Button>
           {isApprovedForAll && (
             <Button
+              className="modalButtonStyle"
               textColor="blue.500"
-              fontSize={20}
-              h={12}
-              w={20}
-              bgColor="white"
               onClick={onClickSetForSaleNft}
               isDisabled={isLoading || !canSell || !salePrice}
               isLoading={isLoading}

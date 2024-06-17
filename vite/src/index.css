@@ -21,3 +21,10 @@
   align-items: center;
   flex-direction: column;
 }
+
+.modalButtonStyle {
+  font-size: 20px;
+  height: 12px;
+  width: 20px;
+  background-color: rgba(0, 0, 0, 0.1);
+}

@@ -52,7 +52,7 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
     } catch (error) {
       console.error(error);
       setIsLoading(false);
-      getToast("구매 실패", "구매 되지 않았습니다.", "error");
+      getToast("구매 실패", "구매가 정상적으로 처리되지 않았습니다.", "error");
     }
   };
 
@@ -108,21 +108,15 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
 
         <ModalFooter>
           <Button
-            fontSize={20}
-            h={12}
-            w={20}
-            bgColor="white"
+            className="modalButtonStyle"
             onClick={onClose}
             isDisabled={isLoading}
           >
             취소
           </Button>
           <Button
+            className="modalButtonStyle"
             textColor="red.500"
-            fontSize={20}
-            h={12}
-            w={20}
-            bgColor="white"
             onClick={onClickPurchaseNft}
             isDisabled={isTokenOwner || isLoading}
             isLoading={isLoading}
