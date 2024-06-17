@@ -87,7 +87,7 @@ const Create: FC = () => {
               flexDir="column"
               alignItems="center"
               overflowY="auto"
-              maxH={[200, 200, 450, 450, 550, 700]}
+              maxH={[200, 200, 450, 450, 550, 600]}
             >
               {mintedList?.map((v, i) => {
                 if (v > 0) {
