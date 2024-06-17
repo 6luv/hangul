@@ -15,7 +15,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
 import { parseEther } from "ethers";
 
@@ -37,6 +37,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
   const [salePrice, setSalePrice] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [canSell, setCanSell] = useState<boolean>(false);
+  const navigate = useNavigate();
   const { signer, saleContract } = useOutletContext<OutletContext>();
 
   const onClickSetForSaleNft = async () => {
@@ -52,6 +53,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
 
       setIsLoading(false);
       onClose();
+      navigate("/sale");
     } catch (error) {
       console.error(error);
       setIsLoading(false);
