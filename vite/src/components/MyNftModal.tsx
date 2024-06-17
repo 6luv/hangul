@@ -79,8 +79,6 @@ const MyNftModal: FC<MyNftModalProps> = ({
     getCanSell();
   }, [signer, saleContract, hangulNftMetadata]);
 
-  useEffect(() => console.log(canSell), [canSell]);
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -102,69 +100,57 @@ const MyNftModal: FC<MyNftModalProps> = ({
             <Text fontSize={24} fontWeight="bold" textAlign="center" w="80%">
               한글 NFT #{tokenId} [{hangulNftMetadata?.name}]
             </Text>
-            {isApprovedForAll && canSell ? (
-              <InputGroup w="70%" mt={4}>
-                <Input
-                  fontSize={24}
-                  value={salePrice}
-                  textAlign="right"
-                  isDisabled={isLoading}
-                  onChange={(e) => setSalePrice(e.target.value)}
-                />
-                <InputRightAddon>ETH</InputRightAddon>
-              </InputGroup>
-            ) : (
-              <Text
-                fontSize={20}
-                fontWeight="semibold"
-                textColor="blue.500"
-                textAlign="center"
-                w="80%"
-              >
-                이미 판매 등록 되었습니다!
-              </Text>
-            )}
+            {isApprovedForAll &&
+              (canSell ? (
+                <InputGroup w="70%" mt={4}>
+                  <Input
+                    fontSize={24}
+                    value={salePrice}
+                    textAlign="right"
+                    isDisabled={isLoading}
+                    onChange={(e) => setSalePrice(e.target.value)}
+                  />
+                  <InputRightAddon>ETH</InputRightAddon>
+                </InputGroup>
+              ) : (
+                <Text
+                  fontSize={20}
+                  fontWeight="semibold"
+                  textColor="blue.500"
+                  textAlign="center"
+                  w="80%"
+                >
+                  이미 판매 등록 되었습니다!
+                </Text>
+              ))}
           </Flex>
         </ModalBody>
 
         <ModalFooter>
-          {isApprovedForAll ? (
-            <>
-              <Button
-                onClick={onClose}
-                textColor="red.500"
-                fontSize={20}
-                h={12}
-                w={20}
-                bgColor="white"
-                isDisabled={isLoading}
-              >
-                취소
-              </Button>
-              <Button
-                textColor="blue.500"
-                fontSize={20}
-                h={12}
-                w={20}
-                bgColor="white"
-                onClick={onClickSetForSaleNft}
-                isDisabled={isLoading || !canSell}
-                isLoading={isLoading}
-                loadingText="등록중"
-              >
-                등록
-              </Button>
-            </>
-          ) : (
+          <Button
+            onClick={onClose}
+            textColor={isApprovedForAll ? "red.500" : "blue.500"}
+            fontSize={20}
+            h={12}
+            w={20}
+            bgColor="white"
+            isDisabled={isLoading}
+          >
+            {isApprovedForAll ? "취소" : "확인"}
+          </Button>
+          {isApprovedForAll && (
             <Button
               textColor="blue.500"
               fontSize={20}
               h={12}
               w={20}
               bgColor="white"
-              onClick={onClose}
+              onClick={onClickSetForSaleNft}
+              isDisabled={isLoading || !canSell || !salePrice}
+              isLoading={isLoading}
+              loadingText="등록중"
             >
-              확인
+              등록
             </Button>
           )}
         </ModalFooter>
