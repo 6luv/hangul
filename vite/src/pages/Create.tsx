@@ -53,12 +53,7 @@ const Create: FC = () => {
   return (
     <Flex flexDir="column" w="100%">
       <Flex
-        m={12}
-        p={4}
-        flexGrow={1}
-        bgColor="white"
-        rounded="lg"
-        boxShadow="md"
+        className="mainFlexStyle"
         alignItems="center"
         justifyContent="space-between"
       >

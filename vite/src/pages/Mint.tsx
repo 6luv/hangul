@@ -53,7 +53,12 @@ const Mint: FC = () => {
 
   return (
     <Flex flexDir="column" w="100%">
-      <Flex className="mainFlexStyle">
+      <Flex
+        className="mainFlexStyle"
+        flexDir="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Image
           w={[40, 60, 80]}
           opacity="0.7"
