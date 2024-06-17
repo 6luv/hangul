@@ -5,17 +5,7 @@ import SlideNfts from "../components/SlideNfts";
 const Home: FC = () => {
   return (
     <Flex flexDir="column" w="100%">
-      <Flex
-        m={12}
-        p={4}
-        flexGrow={1}
-        bgColor="white"
-        rounded="lg"
-        boxShadow="md"
-        alignItems="center"
-        flexDir="column"
-        justifyContent="space-between"
-      >
+      <Flex className="mainFlexStyle">
         <Flex
           h="70%"
           justifyContent="center"

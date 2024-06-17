@@ -66,16 +66,7 @@ const My: FC = () => {
 
   return (
     <Flex flexDir="column" w="100%">
-      <Flex
-        m={12}
-        p={4}
-        flexGrow={1}
-        bgColor="white"
-        rounded="lg"
-        boxShadow="md"
-        alignItems="center"
-        flexDir="column"
-      >
+      <Flex className="mainFlexStyle">
         {signer ? (
           <>
             <Flex
