@@ -18,10 +18,3 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-.modalButtonStyle {
-  font-size: 20px;
-  height: 12px;
-  width: 20px;
-  background-color: rgba(0, 0, 0, 0.1);
-}

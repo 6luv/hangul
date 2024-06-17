@@ -108,14 +108,20 @@ const SaleNftModal: FC<SaleNftModalProps> = ({
 
         <ModalFooter>
           <Button
-            className="modalButtonStyle"
+            fontSize={20}
+            h={12}
+            w={20}
+            bgColor="white"
             onClick={onClose}
             isDisabled={isLoading}
           >
             취소
           </Button>
           <Button
-            className="modalButtonStyle"
+            fontSize={20}
+            h={12}
+            w={20}
+            bgColor="white"
             textColor="red.500"
             onClick={onClickPurchaseNft}
             isDisabled={isTokenOwner || isLoading}
