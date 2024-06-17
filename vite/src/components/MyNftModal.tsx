@@ -25,7 +25,6 @@ interface MyNftModalProps {
   onClose: () => void;
   hangulNftMetadata: IHangulNftMetadata | null;
   isApprovedForAll: boolean;
-  tokenId: number;
 }
 
 const MyNftModal: FC<MyNftModalProps> = ({
@@ -33,7 +32,6 @@ const MyNftModal: FC<MyNftModalProps> = ({
   onClose,
   hangulNftMetadata,
   isApprovedForAll,
-  tokenId,
 }) => {
   const [salePrice, setSalePrice] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -48,7 +46,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
       if (!salePrice || isNaN(Number(salePrice))) return;
 
       const response = await saleContract?.setForSaleNft(
-        tokenId,
+        hangulNftMetadata?.tokenId,
         parseEther(salePrice)
       );
       await response.wait();
@@ -116,7 +114,7 @@ const MyNftModal: FC<MyNftModalProps> = ({
               alt={hangulNftMetadata?.name}
             />
             <Text fontSize={24} fontWeight="bold" textAlign="center" w="80%">
-              한글 NFT #{tokenId} [{hangulNftMetadata?.name}]
+              한글 NFT #{hangulNftMetadata?.tokenId} [{hangulNftMetadata?.name}]
             </Text>
             {isApprovedForAll &&
               (canSell ? (

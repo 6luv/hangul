@@ -55,7 +55,6 @@ const MyNftCard: FC<MyNftCardProps> = ({
         onClose={onClose}
         hangulNftMetadata={hangulNftMetadata}
         isApprovedForAll={isApprovedForAll}
-        tokenId={tokenId}
       />
     </>
   );
