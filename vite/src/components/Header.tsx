@@ -132,13 +132,15 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
               : "메뉴"}
           </MenuButton>
           <MenuList>
-            {signer ? (
-              <MenuItem onClick={onClickMetamaskLogout}>로그아웃</MenuItem>
-            ) : (
-              <MenuItem onClick={() => useMetamaskLogin(setSigner)}>
-                로그인
-              </MenuItem>
-            )}
+            <MenuItem
+              onClick={
+                signer
+                  ? onClickMetamaskLogout
+                  : () => useMetamaskLogin(setSigner)
+              }
+            >
+              {signer ? "로그아웃" : "로그인"}
+            </MenuItem>
             {headerNavLinks.map((v, i) => (
               <MenuItem key={i} onClick={() => navigate(v.path)}>
                 {v.name}
