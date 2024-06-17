@@ -62,20 +62,19 @@ const Create: FC = () => {
             <Flex w={["0%", "0%", "80%"]} h="100%">
               {canvasList.map((v, i) => (
                 <Rnd
+                  key={i}
                   default={{
                     x: 0,
                     y: 0,
                     width: 100,
                     height: 100,
                   }}
-                  disableDragging={false}
                 >
                   <Image
                     w={28}
                     h={28}
                     src={`/images/nfts/${v + 1}.png`}
                     alt=""
-                    draggable={true}
                     onDoubleClick={() => removeFromCanvas(i)}
                   />
                 </Rnd>
