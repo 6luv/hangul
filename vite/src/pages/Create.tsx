@@ -71,10 +71,11 @@ const Create: FC = () => {
                   }}
                 >
                   <Image
-                    w={28}
-                    h={28}
+                    w="100%"
+                    h="100%"
                     src={`/images/nfts/${v + 1}.png`}
                     alt=""
+                    draggable={false}
                     onDoubleClick={() => removeFromCanvas(i)}
                   />
                 </Rnd>
@@ -91,7 +92,7 @@ const Create: FC = () => {
               {mintedList?.map((v, i) => {
                 if (v > 0) {
                   return (
-                    <Flex flexDir="column" alignItems="center" my={2}>
+                    <Flex key={i} flexDir="column" alignItems="center" my={2}>
                       <Box pos="relative">
                         <Text
                           pos="absolute"
