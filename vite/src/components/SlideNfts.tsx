@@ -11,13 +11,36 @@ const SlideNfts: FC = () => {
   const settings = {
     centerMode: true,
     infinite: true,
-    slidesToShow: 5,
+    slidesToShow: 6,
     autoplay: true,
     speed: 3000,
     autoplaySpeed: 0,
     centerPadding: "200px",
     arrows: false,
     cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 1200, // 1200px 이하일 때 적용할 설정
+        settings: {
+          slidesToShow: 5,
+          centerPadding: "100px",
+        },
+      },
+      {
+        breakpoint: 992, // 992px 이하일 때 적용할 설정
+        settings: {
+          slidesToShow: 5,
+          centerPadding: "10px",
+        },
+      },
+      {
+        breakpoint: 768, // 768px 이하일 때 적용할 설정
+        settings: {
+          slidesToShow: 2,
+          centerPadding: "10px",
+        },
+      },
+    ],
   };
 
   return (
@@ -34,7 +57,7 @@ const SlideNfts: FC = () => {
                 rounded="lg"
                 boxShadow="lg"
                 p={2}
-                w={40}
+                w={[12, 28, 28, 28, 36]}
               />
             </Box>
           ))}
