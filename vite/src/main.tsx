@@ -6,8 +6,8 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
   fonts: {
-    heading: "OneMobileTitle",
-    body: "OneMobileTitle",
+    heading: "ONE-Mobile-Title",
+    body: "ONE-Mobile-Title",
   },
 });
 
