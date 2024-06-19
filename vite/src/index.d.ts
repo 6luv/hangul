@@ -6,6 +6,7 @@ interface IQuizData {
   quiz: string;
   choices: string[];
   correctAnswer: string;
+  description: string;
 }
 
 interface INftMetadata {

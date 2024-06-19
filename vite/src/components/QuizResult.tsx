@@ -32,24 +32,27 @@ const QuizResult: FC<QuizResultProps> = ({
   };
 
   return (
-    <Flex flexDir="column" w="100%" h="100%" py={4}>
-      <Flex flexDir="column" w="100%" alignItems="center" my={4}>
+    <Flex flexDir="column" w="100%" h="100%" gap={4}>
+      <Flex
+        flexDir="column"
+        w="100%"
+        alignItems="center"
+        borderBottom="2px solid black"
+        py={2}
+      >
         <Text fontSize={[20, 32, 40]} fontWeight="bold">
           {correctCount >= 4
             ? "한글 NFT를 발행해 보세요!"
             : "다시 도전해보세요!"}
         </Text>
       </Flex>
-      <Flex flexDir="column" flexGrow={1} w="100%" alignItems="center">
-        <Text
-          fontSize={[20, 24, 28]}
-          textColor="blue.500"
-          fontWeight="bold"
-          borderBottom="4px"
-          mb={8}
-        >
-          {correctCount} / 5
-        </Text>
+      <Flex
+        flexDir="column"
+        flexGrow={1}
+        w="100%"
+        alignItems="center"
+        justifyContent="center"
+      >
         <Flex alignItems="center" justifyContent="center" mx={8} w="100%">
           <QuizTabs quizList={quizList} choices={choices} />
         </Flex>

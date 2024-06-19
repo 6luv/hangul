@@ -16,7 +16,7 @@ interface QuizTabsProps {
 const QuizTabs: FC<QuizTabsProps> = ({ quizList, choices }) => {
   return (
     <Tabs>
-      <TabList>
+      <TabList justifyContent="center">
         {quizList.map((v, i) => (
           <Tab key={i}>
             <Text
@@ -33,8 +33,13 @@ const QuizTabs: FC<QuizTabsProps> = ({ quizList, choices }) => {
       </TabList>
       <TabPanels>
         {quizList.map((v, i) => (
-          <TabPanel key={i}>
-            <Text>{v.correctAnswer}</Text>
+          <TabPanel key={i} w="100%" justifyContent="center">
+            <Text fontWeight="bold" fontSize={28} mb={4}>
+              {v.correctAnswer}
+            </Text>
+            <Text className="description" fontWeight="semibold" fontSize={20}>
+              {v.description}
+            </Text>
           </TabPanel>
         ))}
       </TabPanels>
