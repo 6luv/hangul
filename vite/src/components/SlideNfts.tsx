@@ -20,21 +20,21 @@ const SlideNfts: FC = () => {
     cssEase: "linear",
     responsive: [
       {
-        breakpoint: 1200, // 1200px 이하일 때 적용할 설정
+        breakpoint: 1200,
         settings: {
           slidesToShow: 5,
           centerPadding: "100px",
         },
       },
       {
-        breakpoint: 992, // 992px 이하일 때 적용할 설정
+        breakpoint: 992,
         settings: {
           slidesToShow: 5,
           centerPadding: "10px",
         },
       },
       {
-        breakpoint: 768, // 768px 이하일 때 적용할 설정
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           centerPadding: "10px",
