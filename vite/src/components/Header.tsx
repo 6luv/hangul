@@ -7,10 +7,9 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { JsonRpcSigner } from "ethers";
-import { Dispatch, FC, SetStateAction } from "react";
+import { JsonRpcSigner, ethers } from "ethers";
+import { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMetamaskLogin } from "../lib";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 interface HeaderProps {
@@ -48,9 +47,33 @@ const headerNavLinks = [
 const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
   const navigate = useNavigate();
 
+  const getSigner = async () => {
+    if (!window.ethereum) return;
+
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    setSigner(await provider.getSigner());
+  };
+
+  const useMetamaskLogin = async () => {
+    try {
+      getSigner();
+      localStorage.setItem("isLogin", "true");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onClickMetamaskLogout = () => {
     setSigner(null);
+    localStorage.removeItem("isLogin");
   };
+
+  useEffect(() => {
+    const localIsLogin = localStorage.getItem("isLogin");
+    if (localIsLogin === "true") {
+      getSigner();
+    }
+  }, []);
 
   return (
     <Flex
@@ -102,7 +125,9 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
               {signer.address.substring(signer.address.length - 4)}
             </MenuButton>
             <MenuList>
-              <MenuItem onClick={onClickMetamaskLogout}>로그아웃</MenuItem>
+              <MenuItem onClick={() => onClickMetamaskLogout()}>
+                로그아웃
+              </MenuItem>
             </MenuList>
           </Menu>
         ) : (
@@ -110,7 +135,7 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
             variant="link"
             textColor="black"
             fontSize={20}
-            onClick={() => useMetamaskLogin(setSigner)}
+            onClick={() => useMetamaskLogin()}
           >
             로그인
           </Button>
@@ -134,8 +159,8 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
             <MenuItem
               onClick={
                 signer
-                  ? onClickMetamaskLogout
-                  : () => useMetamaskLogin(setSigner)
+                  ? () => onClickMetamaskLogout()
+                  : () => useMetamaskLogin()
               }
             >
               {signer ? "로그아웃" : "로그인"}
