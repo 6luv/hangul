@@ -24,7 +24,7 @@ NFT는 한글 자음 19개, 모음 14개, 특수문자 5개로 이루어져 있�
 
 ## 사용
 
-Chrome 브라우저에 Metamask가 깔려있는지 확인해주세요.
+Chrome 브라우저에 Metamask가 깔려있는지 확인해 주세요.
 
 [Metamask 다운로드](https://metamask.io/download/)
 
