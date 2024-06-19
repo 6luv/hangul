@@ -62,8 +62,6 @@ const My: FC = () => {
     getIsApprovedForAll();
   }, [signer, mintContract]);
 
-  useEffect(() => console.log(mintedList), [mintedList]);
-
   return (
     <Flex flexDir="column" w="100%">
       <Flex
