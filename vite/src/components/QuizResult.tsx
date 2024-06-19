@@ -1,5 +1,6 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import { Dispatch, FC, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 import QuizTabs from "./QuizTabs";
 
 interface QuizResultProps {
@@ -23,6 +24,8 @@ const QuizResult: FC<QuizResultProps> = ({
   quizList,
   setQuizList,
 }) => {
+  const navigate = useNavigate();
+
   const onClickReplay = () => {
     setStart(false);
     setCurrentQuizIndex(0);
@@ -57,7 +60,7 @@ const QuizResult: FC<QuizResultProps> = ({
           <QuizTabs quizList={quizList} choices={choices} />
         </Flex>
       </Flex>
-      <Flex flexDir="column" w="100%" alignItems="center">
+      <Flex w="100%" alignItems="center" justifyContent="center" gap={4}>
         <Button
           mt={8}
           h={12}
@@ -70,6 +73,20 @@ const QuizResult: FC<QuizResultProps> = ({
             다시 풀어보기
           </Text>
         </Button>
+        {correctCount >= 4 && (
+          <Button
+            mt={8}
+            h={12}
+            w={["90%", "70%", "25%"]}
+            bgColor="green.500"
+            _hover={{ bgColor: "green.700" }}
+            onClick={() => navigate("/mint")}
+          >
+            <Text fontSize={[16, 18, 20]} textColor="white" fontWeight="bold">
+              발행하기
+            </Text>
+          </Button>
+        )}
       </Flex>
     </Flex>
   );

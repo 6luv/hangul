@@ -97,7 +97,6 @@ const Header: FC<HeaderProps> = ({ signer, setSigner }) => {
               fontSize={20}
               textColor="blue.500"
               as={Button}
-              rightIcon={<ChevronDownIcon />}
             >
               {signer.address.substring(0, 5)}...
               {signer.address.substring(signer.address.length - 4)}
