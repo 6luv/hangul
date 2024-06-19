@@ -2,9 +2,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "./Layout";
-import axios from "axios";
 import SaleNftModal from "./SaleNftModal";
 import NftCard from "./NftCard";
+import axios from "axios";
 
 interface SaleNftCardProps {
   tokenId: number;

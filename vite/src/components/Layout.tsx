@@ -1,6 +1,5 @@
 import { Flex } from "@chakra-ui/react";
 import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import Header from "./Header";
 import { Outlet } from "react-router-dom";
 import { JsonRpcSigner } from "ethers";
 import { Contract } from "ethers";
@@ -10,6 +9,7 @@ import {
   mintContractAddress,
   saleContractAddress,
 } from "../lib/contractAddress";
+import Header from "./Header";
 
 export interface OutletContext {
   signer: JsonRpcSigner | null;

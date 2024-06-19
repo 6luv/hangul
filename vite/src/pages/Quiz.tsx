@@ -1,10 +1,10 @@
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
-import QuizCard from "../components/QuizCard";
-import quizData from "../data/quizData.json";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
+import QuizCard from "../components/QuizCard";
 import QuizResult from "../components/QuizResult";
+import quizData from "../data/quizData.json";
 
 const maxQuizIndex = 29;
 const minQuizIndex = 0;

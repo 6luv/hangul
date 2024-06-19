@@ -2,8 +2,8 @@ import { Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { OutletContext } from "../components/Layout";
-import MyNftCard from "../components/MyNftCard";
 import { saleContractAddress } from "../lib/contractAddress";
+import MyNftCard from "../components/MyNftCard";
 import LoginNotice from "../components/LoginNotice";
 
 const My: FC = () => {

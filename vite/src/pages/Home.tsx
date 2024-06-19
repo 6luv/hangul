@@ -8,14 +8,14 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { FC } from "react";
-import SlideNfts from "../components/SlideNfts";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { RiCoinLine } from "react-icons/ri";
 import { BiStore } from "react-icons/bi";
 import { IoExtensionPuzzleOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
+import SlideNfts from "../components/SlideNfts";
 
-const HomeMenu = [
+const HomeMenuData = [
   {
     title: "환영합니다!",
     description: `한글 맞춤법 문제를 통해 NFT를 얻을 수 있는 공간입니다.
@@ -68,7 +68,7 @@ const Home: FC = () => {
         <Tabs mt={12} size="md" isFitted variant="enclosed" colorScheme="white">
           <Flex>
             <TabList gap={2}>
-              {HomeMenu.map((v, i) => (
+              {HomeMenuData.map((v, i) => (
                 <Tab key={i}>
                   <Flex
                     flexDir="column"
@@ -86,7 +86,7 @@ const Home: FC = () => {
           </Flex>
           <Flex>
             <TabPanels>
-              {HomeMenu.map((v, i) => (
+              {HomeMenuData.map((v, i) => (
                 <TabPanel key={i} mt={16} border="2px" rounded="2xl">
                   <Text
                     fontSize={[16, 20, 24]}
