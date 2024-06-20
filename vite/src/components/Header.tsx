@@ -19,7 +19,7 @@ interface HeaderProps {
 
 const headerNavLinks = [
   {
-    name: "홈",
+    name: "한글",
     path: "/",
   },
   {
@@ -39,7 +39,7 @@ const headerNavLinks = [
     path: "/create",
   },
   {
-    name: "내 페이지",
+    name: "내 자산",
     path: "/my",
   },
 ];
