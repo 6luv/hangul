@@ -51,7 +51,7 @@ const Create: FC = () => {
   }, [signer, mintContract]);
 
   return (
-    <Flex flexDir="column" w="100%">
+    <Flex flexDir="column" w="100%" pos="relative">
       <Flex
         className="mainFlexStyle"
         alignItems="center"
@@ -60,6 +60,17 @@ const Create: FC = () => {
         {signer ? (
           <>
             <Flex w={["0%", "0%", "80%"]} h="100%">
+              <Text
+                pos="absolute"
+                top={3}
+                left={0}
+                w="100%"
+                textAlign="center"
+                fontWeight="semibold"
+                textColor="gray.500"
+              >
+                한 번 누르면 추가, 두 번 누르면 제거됩니다.
+              </Text>
               {canvasList.map((v, i) => (
                 <Rnd
                   key={i}
